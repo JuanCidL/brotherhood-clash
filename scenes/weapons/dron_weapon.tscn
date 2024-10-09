@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://niw5m0vifv5v"]
+
+[ext_resource type="Script" path="res://scenes/weapons/dron_weapon.gd" id="1_qt4uu"]
+[ext_resource type="Texture2D" uid="uid://tw8t38ns0seh" path="res://icon.svg" id="2_h8h24"]
+[ext_resource type="PackedScene" uid="uid://bvyl75y3qnq35" path="res://scenes/utils/drag_area.tscn" id="3_t2f4n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5b0md"]
+size = Vector2(30, 30)
+
+[node name="DronWeapon" type="RigidBody2D"]
+script = ExtResource("1_qt4uu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_h8h24")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_5b0md")
+
+[node name="DragArea" parent="." instance=ExtResource("3_t2f4n")]
