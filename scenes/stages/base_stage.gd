@@ -3,6 +3,7 @@ extends Node2D
 
 const MIN_MINION_QUANTITY = 3
 const MAX_MINION_QUANTITY = 5
+const CHARACTER_HEALTH = 100
 
 enum GameState{
 	CHOOSING,
@@ -28,7 +29,7 @@ enum GameState{
 
 # UI
 @onready var canvas: CanvasLayer
-const PLAYER_UI = preload("res://scenes/ui/player_ui.tscn")
+@onready var player_ui: PlayerUI
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -36,17 +37,20 @@ func _ready() -> void:
 	teams_quantity = Game.players.size()
 	for i in Game.players.size():
 		players_data.append(Game.players[i])
-		characters[Game.players[i].id] = []
-		current_character[Game.players[i].id] = 0
+		var id = Game.players[i].id
+		characters[id] = []
+		current_character[id] = 0
+		Game.players_health[id] = CHARACTER_HEALTH * minions_quantity
 	current_player = randi_range(0, teams_quantity-1)
 	player_id = Game.get_current_player().id
-	
 	_setup_ui()
 
 
 func _process(delta: float) -> void:
 	
 	var mouse_pos = get_local_mouse_position()
+	
+	Game.take_damage(player_id, 1)
 	
 	match game_state:
 		GameState.CHOOSING:
@@ -60,14 +64,14 @@ func _setup_ui():
 	# Ui setup
 	Debug.log("Role %s" % Game.players[current_player].role, 3)
 	canvas = CanvasLayer.new()
-	add_child(canvas)
-	var ui_instance = PLAYER_UI.instantiate()
-	canvas.add_child(ui_instance)
+	add_child(canvas, true)
+	player_ui = preload("res://scenes/ui/player_ui.tscn").instantiate()
+	canvas.add_child(player_ui, true)
 
 # function to setup the placeholder spawn indicator
 func _placeholder_setup():
 	sprite_placeholder = Sprite2D.new()
-	add_child(sprite_placeholder)
+	add_child(sprite_placeholder, true)
 	sprite_placeholder.texture = preload("res://resources/pj_sinfondo.png")
 	sprite_placeholder.scale = Vector2(0.25, 0.25)
 	sprite_placeholder.modulate.a = 0.4
@@ -82,7 +86,7 @@ func _placeholder_draw(mouse_pos: Vector2):
 @rpc("any_peer", "call_local", "reliable")
 func _handle_place(mouse_pos: Vector2, player_id: int):
 	var instance: BaseCharacter = default_player.instantiate()
-	add_child(instance)
+	add_child(instance, true)
 	instance.global_position = mouse_pos
 	characters[player_id].append(instance)
 	

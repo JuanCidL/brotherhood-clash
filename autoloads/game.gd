@@ -131,3 +131,22 @@ const HAND_OPEN_POINTER = preload("res://assets/fx/hand_open_pointer.png")
 const HAND_CLOSE_POINTER = preload("res://assets/fx/hand_close_pointer.png")
 
 const GRAVITY = Vector2(0, 980)
+
+#############################
+#  Global UI player setting #
+#############################
+
+var players_health: Dictionary = {} # Map player id to player health
+signal health_changed(key: int, value: int) # signal to emit global health changes
+
+# Function to decrease the global health and emit it
+func take_damage(key: int, value: int):
+	players_health[key] -= value
+	health_changed.emit(key, value)
+
+# Function to increase the global health and emit it
+func heal(key: int, value: int):
+	players_health[key] += value
+	health_changed.emit(key, value)
+
+#############################
