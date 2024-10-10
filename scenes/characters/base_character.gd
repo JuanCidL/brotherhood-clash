@@ -34,6 +34,15 @@ func _input(event: InputEvent) -> void:
 			_on_weapon_instance(weapon_scene)
 		if event.is_action_released("number_2"):
 			_on_weapon_instance(dron_scene)
+		#if event.is_action_released("number_2"):
+			#_on_weapon_instance(weapon_scene)
+		if event.is_action_released("number_3"):
+			_on_weapon_instance(weapon_scene)
+		if event.is_action_released("number_4"):
+			_on_weapon_instance(weapon_scene)
+		if event.is_action_released("number_5"):
+			_on_weapon_instance(weapon_scene)
+		
 
 # Phisics
 func _physics_process(delta: float) -> void:
