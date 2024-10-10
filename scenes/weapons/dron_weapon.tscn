@@ -18,4 +18,9 @@ texture = ExtResource("2_h8h24")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_5b0md")
 
-[node name="DragArea" parent="." instance=ExtResource("3_t2f4n")]
+[node name="DragArea" parent="." node_paths=PackedStringArray("body") instance=ExtResource("3_t2f4n")]
+body = NodePath("..")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true

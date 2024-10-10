@@ -1,6 +1,7 @@
 class_name DragAreaNode
 extends Node2D
 
+var throwed: bool = false
 # areas and shapes
 @onready var drag_area: Area2D = $DragArea
 @onready var drag_area_shape: CollisionShape2D = $DragArea/DragAreaShape
@@ -72,6 +73,7 @@ func _mouse_over() -> bool:
 # Function to execute the throw of the body
 @rpc("any_peer", "call_local", "reliable")
 func _throw(impulse: Vector2) -> void:
+	throwed = true
 	if body.freeze:
 		body.freeze = false
 	body.state = Throwable.State.MOVING_STATE

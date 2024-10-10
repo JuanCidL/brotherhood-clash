@@ -47,6 +47,8 @@ func _input(event: InputEvent) -> void:
 # Phisics
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
+	#if weapon_instance.action_state == true:
+		#weapon_instance.queue_free()
 
 @rpc
 func _send_position(pos: Vector2):
