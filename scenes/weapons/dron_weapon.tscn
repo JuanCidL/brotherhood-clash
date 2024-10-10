@@ -8,6 +8,7 @@
 size = Vector2(30, 30)
 
 [node name="DronWeapon" type="RigidBody2D"]
+freeze = true
 script = ExtResource("1_qt4uu")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
