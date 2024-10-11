@@ -29,7 +29,7 @@ debug_color = Color(0.270347, 0.632742, 7.70092e-07, 0.42)
 [node name="Circle" type="Line2D" parent="."]
 texture_repeat = 2
 width = 20.0
-default_color = Color(1, 1, 1, 0.490196)
+default_color = Color(1, 1, 1, 0.8)
 texture = ExtResource("2_v87kq")
 texture_mode = 1
 joint_mode = 2
@@ -38,7 +38,7 @@ end_cap_mode = 2
 
 [node name="Trajectory" type="Line2D" parent="."]
 texture_repeat = 2
-default_color = Color(0.772549, 0, 0, 0.705882)
+default_color = Color(0.772549, 0, 0, 0.8)
 texture = ExtResource("2_v87kq")
 texture_mode = 1
 joint_mode = 2

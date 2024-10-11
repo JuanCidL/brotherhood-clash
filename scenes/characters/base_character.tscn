@@ -8,6 +8,7 @@
 size = Vector2(216, 300)
 
 [node name="RigidBody2D" type="RigidBody2D"]
+top_level = true
 collision_layer = 2
 collision_mask = 3
 lock_rotation = true

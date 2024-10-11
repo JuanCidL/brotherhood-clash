@@ -1,17 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://cpq5mr5vnad37"]
+[gd_scene load_steps=5 format=3 uid="uid://cpq5mr5vnad37"]
 
 [ext_resource type="PackedScene" uid="uid://d3eswp8c5ptrj" path="res://scenes/stages/Building1.tscn" id="1_a24b2"]
 [ext_resource type="PackedScene" uid="uid://ccbm71hpgxihk" path="res://scenes/stages/Building2.tscn" id="2_gpex4"]
 [ext_resource type="PackedScene" uid="uid://da1ooq0jne0tw" path="res://scenes/stages/Araña.tscn" id="3_g2418"]
+[ext_resource type="Texture2D" uid="uid://cjgijvbry4w7a" path="res://resources/Tilemap_edificios/background_tileset_city_free.png" id="4_bfjgb"]
 
 [node name="BasicMap" type="Node2D"]
 
 [node name="Building" parent="." instance=ExtResource("1_a24b2")]
+modulate = Color(0.674815, 0.674815, 0.674815, 1)
 position = Vector2(-2, 192)
 
 [node name="Building4" parent="." instance=ExtResource("2_gpex4")]
+modulate = Color(0.680321, 0.680321, 0.680321, 1)
 position = Vector2(1152, 192)
 
 [node name="Araña" parent="." instance=ExtResource("3_g2418")]
+modulate = Color(0.713518, 0.713518, 0.713518, 1)
 position = Vector2(320, 320)
 scale = Vector2(2, 2)
+
+[node name="BackgroundTilesetCityFree" type="Sprite2D" parent="."]
+modulate = Color(0.544975, 0.544974, 0.544974, 0.741176)
+self_modulate = Color(0.979927, 0.717754, 0.507865, 1)
+show_behind_parent = true
+position = Vector2(697, 284)
+scale = Vector2(4.69375, 4.53125)
+texture = ExtResource("4_bfjgb")
