@@ -1,6 +1,8 @@
 class_name PlayerUI
 extends MarginContainer
 
+const HEALTH_BAR_SCENE = preload("res://scenes/ui/health_bar.tscn")
+
 @onready var role_text: Label = $VBoxContainer/TopBox/RoleText
 @onready var bottom_box: HBoxContainer = $VBoxContainer/BottomBox
 @onready var player: Statics.PlayerData
@@ -13,12 +15,11 @@ func _ready() -> void:
 	
 	for i in Game.players.size():
 		var id = Game.players[i].id
-		var pg_bar = ProgressBar.new()
-		pg_bar.max_value = Game.players_health[id]
-		pg_bar.value = Game.players_health[id]
-		pg_bar.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		health_bars[id] = pg_bar
-		bottom_box.add_child(pg_bar, true)
+		var health_bar = HEALTH_BAR_SCENE.instantiate()
+		health_bar.max_value = Game.players_health[id]
+		health_bar.value = Game.players_health[id]
+		health_bars[id] = health_bar
+		bottom_box.add_child(health_bar, true)
 	# Connect to health signal to change the values on bars
 	Game.health_changed.connect(_on_health_changed)
 	

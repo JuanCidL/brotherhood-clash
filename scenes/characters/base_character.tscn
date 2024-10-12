@@ -1,15 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://cq41bh3fd1hky"]
+[gd_scene load_steps=6 format=3 uid="uid://cq41bh3fd1hky"]
 
 [ext_resource type="Script" path="res://scenes/characters/base_character.gd" id="1_ic8vr"]
 [ext_resource type="Texture2D" uid="uid://dwco3d6wfwti1" path="res://resources/pj_sinfondo.png" id="2_yhsxp"]
 [ext_resource type="PackedScene" uid="uid://bvyl75y3qnq35" path="res://scenes/utils/drag_area.tscn" id="3_oixy1"]
+[ext_resource type="PackedScene" uid="uid://dowscpiyes2bq" path="res://scenes/ui/health_bar.tscn" id="4_tsjhi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tjwvx"]
 size = Vector2(216, 300)
 
 [node name="RigidBody2D" type="RigidBody2D"]
 collision_layer = 2
-collision_mask = 3
+collision_mask = 7
 lock_rotation = true
 script = ExtResource("1_ic8vr")
 
@@ -28,9 +29,9 @@ body = NodePath("..")
 [node name="WeaponSpawn" type="Marker2D" parent="."]
 position = Vector2(0, -56)
 
-[node name="WeaponSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://scenes/weapons/base_weapon.tscn")
-spawn_path = NodePath("../Node")
-spawn_limit = 1
-
-[node name="Node" type="Node" parent="."]
+[node name="HealthBar" parent="." instance=ExtResource("4_tsjhi")]
+offset_left = -40.0
+offset_top = -60.0
+offset_right = 40.0
+offset_bottom = -50.0
+show_percentage = false

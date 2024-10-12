@@ -1,6 +1,25 @@
-[gd_resource type="Theme" format=3 uid="uid://bwgdrcgopd0s1"]
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://bwgdrcgopd0s1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_suswy"]
+bg_color = Color(0.466181, 0.466181, 0.466181, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lkbfl"]
+bg_color = Color(0.403922, 0.588235, 0.360784, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
 
 [resource]
+HealthBar/base_type = &"ProgressBar"
+HealthBar/constants/outline_size = 2
+HealthBar/font_sizes/font_size = 20
+HealthBar/styles/background = SubResource("StyleBoxFlat_suswy")
+HealthBar/styles/fill = SubResource("StyleBoxFlat_lkbfl")
 MarginContainer/constants/margin_bottom = 20
 MarginContainer/constants/margin_left = 20
 MarginContainer/constants/margin_right = 20

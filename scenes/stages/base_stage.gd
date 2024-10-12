@@ -1,9 +1,11 @@
 class_name BaseStage
 extends Node2D
 
+const PLAYER_UI = preload("res://scenes/ui/player_ui.tscn")
+const PLACEHOLDER_SPRITE = preload("res://resources/pj_sinfondo.png")
+
 const MIN_MINION_QUANTITY = 3
 const MAX_MINION_QUANTITY = 5
-const CHARACTER_HEALTH = 100
 
 enum GameState{
 	CHOOSING,
@@ -40,7 +42,7 @@ func _ready() -> void:
 		var id = Game.players[i].id
 		characters[id] = []
 		current_character[id] = 0
-		Game.players_health[id] = CHARACTER_HEALTH * minions_quantity
+		Game.players_health[id] = Game.MINION_MAX_HEALTH * minions_quantity
 	current_player = randi_range(0, teams_quantity-1)
 	player_id = Game.get_current_player().id
 	_setup_ui()
@@ -50,7 +52,7 @@ func _process(delta: float) -> void:
 	
 	var mouse_pos = get_local_mouse_position()
 	
-	Game.take_damage(player_id, 1)
+	#Game.take_damage.rpc(player_id, 1)
 	
 	match game_state:
 		GameState.CHOOSING:
@@ -65,19 +67,19 @@ func _setup_ui():
 	Debug.log("Role %s" % Game.players[current_player].role, 3)
 	canvas = CanvasLayer.new()
 	add_child(canvas, true)
-	player_ui = preload("res://scenes/ui/player_ui.tscn").instantiate()
+	player_ui = PLAYER_UI.instantiate()
 	canvas.add_child(player_ui, true)
 
 # function to setup the placeholder spawn indicator
 func _placeholder_setup():
 	sprite_placeholder = Sprite2D.new()
 	add_child(sprite_placeholder, true)
-	sprite_placeholder.texture = preload("res://resources/pj_sinfondo.png")
+	sprite_placeholder.texture = PLACEHOLDER_SPRITE
 	sprite_placeholder.scale = Vector2(0.25, 0.25)
 	sprite_placeholder.modulate.a = 0.4
 
 # function to draw the placeholder in all game instances 
-@rpc("any_peer", "call_local")
+@rpc("any_peer", "call_local", "unreliable_ordered")
 func _placeholder_draw(mouse_pos: Vector2):
 	sprite_placeholder.global_position = mouse_pos
 

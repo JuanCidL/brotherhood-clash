@@ -27,14 +27,3 @@ text = "Role: "
 [node name="BottomBox" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 10
-
-[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/BottomBox"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-value = 100.0
-
-[node name="ProgressBar2" type="ProgressBar" parent="VBoxContainer/BottomBox"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3

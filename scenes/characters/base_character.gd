@@ -2,19 +2,18 @@ class_name BaseCharacter
 extends Throwable
 
 # Character properties
-var health: int = 100
+var health: int = Game.MINION_MAX_HEALTH
 var weapons: Array = Array([], TYPE_OBJECT, "", null)
 
 # Debug
 var weapon_scene = preload("res://scenes/weapons/base_weapon.tscn")
 var weapon_instance: BaseWeapon = null
 @onready var weapon_spawn: Marker2D = $WeaponSpawn
-@onready var weapon_spawner: MultiplayerSpawner = $WeaponSpawner
-@onready var node: Node = $Node
+@onready var node: Node
 
 # Visual properties
 @onready var drag_area: DragAreaNode = $DragArea
-
+@onready var health_bar: ProgressBar = $HealthBar
 
 # multiplayer setup
 func setup(player_data: Statics.PlayerData) -> void:
@@ -23,6 +22,9 @@ func setup(player_data: Statics.PlayerData) -> void:
 
 func _ready() -> void:
 	throw_power = 10
+	node = Node.new()
+	add_child(node, true)
+	
 
 # Input management
 func _input(event: InputEvent) -> void:
@@ -30,7 +32,7 @@ func _input(event: InputEvent) -> void:
 		drag_area.input_action(event)
 		
 		if event.is_action_released("number_1"):
-			_on_weapon_instance()
+			_on_weapon_instance.rpc()
 
 # Phisics
 func _physics_process(delta: float) -> void:
@@ -40,6 +42,7 @@ func _physics_process(delta: float) -> void:
 func _send_position(pos: Vector2):
 	self.position = pos 
 
+@rpc("any_peer", "call_local", "reliable")
 func _on_weapon_instance():
 	if weapon_instance:
 		weapon_instance.queue_free()
@@ -48,3 +51,15 @@ func _on_weapon_instance():
 	node.add_child(weapon_instance, true)
 	weapon_instance.setup.rpc(get_multiplayer_authority())	
 	weapon_instance.init_pos.rpc(weapon_spawn.global_position)
+
+@rpc("any_peer", "call_local", "reliable")
+func take_damage(value: int):
+	if health <= 0:
+		return
+	health -= value
+	health_bar.value -= value
+	Game.take_damage(Game.get_current_player().id, value)
+	set_collision_mask_value(3, false)
+	await get_tree().create_timer(2).timeout
+	set_collision_mask_value(3, true)
+	

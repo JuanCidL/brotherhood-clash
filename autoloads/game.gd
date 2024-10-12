@@ -136,15 +136,19 @@ const GRAVITY = Vector2(0, 980)
 #  Global UI player setting #
 #############################
 
+const MINION_MAX_HEALTH = 100
+
 var players_health: Dictionary = {} # Map player id to player health
 signal health_changed(key: int, value: int) # signal to emit global health changes
 
 # Function to decrease the global health and emit it
+@rpc("any_peer", "call_local", "reliable")
 func take_damage(key: int, value: int):
 	players_health[key] -= value
 	health_changed.emit(key, value)
 
 # Function to increase the global health and emit it
+@rpc("any_peer", "call_local", "reliable")
 func heal(key: int, value: int):
 	players_health[key] += value
 	health_changed.emit(key, value)
