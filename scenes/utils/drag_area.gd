@@ -1,7 +1,7 @@
 class_name DragAreaNode
 extends Node2D
 
-var throwed: bool = false
+@onready var throwed: bool = false
 # areas and shapes
 @onready var drag_area: Area2D = $DragArea
 @onready var drag_area_shape: CollisionShape2D = $DragArea/DragAreaShape

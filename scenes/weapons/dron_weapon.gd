@@ -4,6 +4,7 @@ extends BaseWeapon
 var timer: float = 0.0
 var timer2: float = 5.0
 var timer3: float = 5.0
+var syncro: float = false
 #var timer4: float = 2.0
 var is_stopped: bool = false
 @export var move_speed: float = 200
@@ -11,7 +12,7 @@ var is_stopped: bool = false
 func _ready() -> void:
 	timer = stop_time
 	throw_power = 10
-	sleeping = false
+	#sleeping = false
 	gravity_again()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -22,23 +23,30 @@ func _physics_process(delta: float) -> void:
 			timer -= delta
 			if timer <= 0.0:
 				stop_rigid_body()	
-		else:
+		else: #Tiempo de vuelo dron out
 			if timer2 >= 0.0:
 				timer2 -= delta
 				handle_player_input(delta)	
-			if timer3 <= 0.0:
+			if timer3 <= 0.0 and not syncro:
+				print("hola")
 				gravity_again()
+				syncro = true
 	#			action(delta)
-			else:
+			else: 
 				timer3 -= delta
 				no_gravity()
 #Devuelve la gravedad al valor normal
 func gravity_again():
-	gravity_scale = 1
+	syncronize_pos.rpc(position)
 #Hace que el objeto flote
 func no_gravity():
 	gravity_scale = 0.0
-
+	
+@rpc("any_peer","call_local","reliable")
+func syncronize_pos(pos:Vector2):
+	self.position = pos
+	gravity_scale = 1
+	
 #Función para realizar una acción
 #En este caso lo haremos explotar
 #func action(delta:float):
@@ -53,9 +61,9 @@ func stop_rigid_body():
 	angular_velocity = 0.0
 	sleeping = true
 	is_stopped = true
+
 func handle_player_input(delta: float):
 	var move_direction = Vector2.ZERO
-	
 	#Detectamos las flechas
 	if Input.is_action_pressed("ui_right"):
 		move_direction.x += 1
@@ -71,6 +79,12 @@ func handle_player_input(delta: float):
 		move_direction = move_direction.normalized()
 	
 	#Aplica el movimiento al cuerpo rigido
-	position += move_direction*move_speed*delta
+	var pos = position + move_direction*move_speed*delta*2
+	send_pos.rpc(pos)
 
+
+@rpc("any_peer","call_local","unreliable_ordered")
+func send_pos(pos:Vector2):
+	self.position = pos
+	
 	

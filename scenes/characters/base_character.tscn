@@ -29,7 +29,7 @@ body = NodePath("..")
 position = Vector2(0, -56)
 
 [node name="WeaponSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://scenes/weapons/base_weapon.tscn")
+_spawnable_scenes = PackedStringArray("res://scenes/weapons/base_weapon.tscn", "res://scenes/weapons/dron_weapon.tscn")
 spawn_path = NodePath("../Node")
 spawn_limit = 1
 
