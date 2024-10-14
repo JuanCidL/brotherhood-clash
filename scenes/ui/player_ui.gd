@@ -4,6 +4,7 @@ extends MarginContainer
 const HEALTH_BAR_SCENE = preload("res://scenes/ui/health_bar.tscn")
 
 @onready var role_text: Label = $VBoxContainer/TopBox/RoleText
+@onready var turn_text: Label = $VBoxContainer/TopBox/TurnText
 @onready var bottom_box: HBoxContainer = $VBoxContainer/BottomBox
 @onready var player: Statics.PlayerData
 @onready var health_bars: Dictionary = {}

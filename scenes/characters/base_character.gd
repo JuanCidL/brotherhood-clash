@@ -6,10 +6,10 @@ var health: int = Game.MINION_MAX_HEALTH
 var weapons: Array = Array([], TYPE_OBJECT, "", null)
 
 # Debug
-var weapon_scene = preload("res://scenes/weapons/base_weapon.tscn")
+var weapon_scene = preload("res://scenes/weapons/weapon_damage.tscn")
 var weapon_instance: BaseWeapon = null
 @onready var weapon_spawn: Marker2D = $WeaponSpawn
-@onready var node: Node
+@onready var node: Node = $Node
 
 # Visual properties
 @onready var drag_area: DragAreaNode = $DragArea
@@ -22,8 +22,6 @@ func setup(player_data: Statics.PlayerData) -> void:
 
 func _ready() -> void:
 	throw_power = 10
-	node = Node.new()
-	add_child(node, true)
 	
 
 # Input management
@@ -32,7 +30,7 @@ func _input(event: InputEvent) -> void:
 		drag_area.input_action(event)
 		
 		if event.is_action_released("number_1"):
-			_on_weapon_instance.rpc()
+			_on_weapon_instance()
 
 # Phisics
 func _physics_process(delta: float) -> void:
@@ -42,9 +40,9 @@ func _physics_process(delta: float) -> void:
 func _send_position(pos: Vector2):
 	self.position = pos 
 
-@rpc("any_peer", "call_local", "reliable")
+@rpc("authority", "reliable")
 func _on_weapon_instance():
-	if weapon_instance:
+	if is_instance_valid(weapon_instance):
 		weapon_instance.queue_free()
 	weapon_instance = weapon_scene.instantiate()
 	weapon_instance.global_position = weapon_spawn.global_position

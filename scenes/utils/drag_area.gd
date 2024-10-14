@@ -8,7 +8,6 @@ extends Node2D
 @onready var click_area_shape: CollisionShape2D = $ClickArea/ClickAreaShape
 @onready var on_click_area: bool = false
 
-
 # circle props
 @onready var circle: Line2D = $Circle
 @onready var texture: Texture2D = circle.texture
@@ -21,6 +20,10 @@ extends Node2D
 # physics
 @onready var impulse: Vector2
 @onready var time_step = 0.02
+@onready var enabled = false
+
+# signal to detect the throw event
+signal on_throw
 
 func _ready() -> void:
 	# Signals to check when mouse is inside the click area
@@ -39,6 +42,9 @@ func _draw() -> void:
 
 # Function to check the drag on the area
 func input_action(event: InputEvent):
+	if not enabled:
+		return
+	
 	if body.state == Throwable.State.IDLE_STATE:
 		if event.is_action_pressed("click"):
 			if event.is_pressed() and _mouse_over():
@@ -76,6 +82,7 @@ func _throw(impulse: Vector2) -> void:
 		body.freeze = false
 	body.state = Throwable.State.MOVING_STATE
 	body.apply_central_impulse(impulse)
+	on_throw.emit()
 
 # Function to draw circle arround the drag area
 func _draw_circle() -> void:
