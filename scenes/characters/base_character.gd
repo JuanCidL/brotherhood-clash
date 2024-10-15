@@ -10,22 +10,27 @@ var weapon_scene = preload("res://scenes/weapons/weapon_damage.tscn")
 var weapon_instance: BaseWeapon = null
 @onready var weapon_spawn: Marker2D = $WeaponSpawn
 @onready var node: Node = $Node
+signal on_weapon_spawn(weapon: BaseWeapon)
 
 # Visual properties
 @onready var drag_area: DragAreaNode = $DragArea
 @onready var health_bar: ProgressBar = $HealthBar
+@onready var turn_mark: Line2D = $Pivot/TurnMark
 
 # multiplayer setup
 func setup(player_data: Statics.PlayerData) -> void:
 	name = str(player_data.id)
 	set_multiplayer_authority(player_data.id)
+	disable()
+	enabled.connect(func(value: bool): turn_mark.visible = value)
 
 func _ready() -> void:
 	throw_power = 10
 	
-
 # Input management
 func _input(event: InputEvent) -> void:
+	if not is_enabled:
+		return
 	if is_multiplayer_authority():
 		drag_area.input_action(event)
 		
@@ -49,6 +54,7 @@ func _on_weapon_instance():
 	node.add_child(weapon_instance, true)
 	weapon_instance.setup.rpc(get_multiplayer_authority())	
 	weapon_instance.init_pos.rpc(weapon_spawn.global_position)
+	on_weapon_spawn.emit(weapon_instance)
 
 @rpc("any_peer", "call_local", "reliable")
 func take_damage(value: int):
