@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dwr3stekvs1mr"]
 
 [ext_resource type="Script" path="res://scenes/stages/test/hwanin_test_stage.gd" id="1_hcl52"]
-[ext_resource type="PackedScene" path="res://scenes/stages/basic_floor.tscn" id="3_umo6f"]
+[ext_resource type="PackedScene" uid="uid://b0lite11uu2ui" path="res://scenes/stages/basic_floor.tscn" id="3_umo6f"]
 
 [node name="HwaninTestStage" type="Node2D"]
 script = ExtResource("1_hcl52")

@@ -5,13 +5,14 @@ extends Node2D
 @onready var markers: Node2D = $Markers
 
 func _ready() -> void:
-	print(Game.players.size())
+	#print(Game.players.size())
 	for i in Game.players.size():
 		var player_data = Game.players[i]
-
 		var instance: BaseCharacter = player_scene.instantiate()
 		players.add_child(instance)
 		instance.setup(player_data)
+		#if (is_multiplayer_authority()):
+			#print(player_data.role)
 		instance.global_position = markers.get_child(i).global_position
 
 func _input(event: InputEvent) -> void:

@@ -23,7 +23,3 @@ func _physics_process(delta: float) -> void:
 @rpc("any_peer", "call_local", "reliable")
 func init_pos(pos: Vector2):
 	self.position = pos
-
-@rpc
-func _send_rotation(rot: float):
-	self.rotation = rot
