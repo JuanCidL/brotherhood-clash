@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://c06e5a0yuvblg"]
+[gd_scene load_steps=3 format=3 uid="uid://c06e5a0yuvblg"]
 
 [ext_resource type="Script" path="res://scenes/stages/base_stage.gd" id="1_ft4ue"]
 [ext_resource type="PackedScene" uid="uid://cpq5mr5vnad37" path="res://scenes/stages/Basic_Map.tscn" id="1_jq600"]
-[ext_resource type="PackedScene" uid="uid://blfrqjts3l8ot" path="res://scenes/weapons/weapon_damage.tscn" id="3_wcv2j"]
 
 [node name="BaseStage" type="Node2D"]
 script = ExtResource("1_ft4ue")
@@ -15,6 +14,3 @@ script = ExtResource("1_ft4ue")
 position = Vector2(704, 260)
 scale = Vector2(-204.103, 8.55589)
 zoom = Vector2(0.45, 0.45)
-
-[node name="WeaponDamage" parent="." instance=ExtResource("3_wcv2j")]
-position = Vector2(560, 279)

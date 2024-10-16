@@ -61,7 +61,7 @@ func _send_position(pos: Vector2):
 	self.position = pos 
 
 @rpc("authority", "reliable")
-func _on_weapon_instance(arma: PackedScene):
+func _on_weapon_instance(arma: BaseWeapon):
 	if is_instance_valid(weapon_instance):
 		weapon_instance.queue_free()
 	weapon_instance = arma.instantiate()
