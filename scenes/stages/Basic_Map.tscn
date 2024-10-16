@@ -9,7 +9,7 @@
 
 [node name="Building" parent="." instance=ExtResource("1_a24b2")]
 modulate = Color(0.674815, 0.674815, 0.674815, 1)
-position = Vector2(-2, 192)
+position = Vector2(0, 192)
 
 [node name="Building4" parent="." instance=ExtResource("2_gpex4")]
 modulate = Color(0.680321, 0.680321, 0.680321, 1)
@@ -24,6 +24,6 @@ scale = Vector2(2, 2)
 modulate = Color(0.544975, 0.544974, 0.544974, 0.741176)
 self_modulate = Color(0.979927, 0.717754, 0.507865, 1)
 show_behind_parent = true
-position = Vector2(697, 284)
+position = Vector2(704, 288)
 scale = Vector2(4.69375, 4.53125)
 texture = ExtResource("4_bfjgb")

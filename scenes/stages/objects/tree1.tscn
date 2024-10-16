@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://t078m5fyfnbo"]
+
+[ext_resource type="PackedScene" uid="uid://dk30cb6grn236" path="res://scenes/stages/objects/trees.tscn" id="1_6dvl3"]
+
+[node name="Tree1" type="Node2D"]
+
+[node name="Trees" parent="." instance=ExtResource("1_6dvl3")]
