@@ -24,28 +24,33 @@ func _physics_process(delta: float) -> void:
 			if timer <= 0.0:
 				stop_rigid_body()	
 		else: #Tiempo de vuelo dron out
-			if timer2 >= 0.0:
+			if timer2 >= 0.0:#El jugador puede mover el dron 
 				timer2 -= delta
+				no_gravity()
 				handle_player_input(delta)	
-			if timer3 <= 0.0 and not syncro:
+			elif timer2 <= 0.0 and not syncro: #Si el tiempo de vuelo terminó ponemos la gravedad
 				print("hola")
 				gravity_again()
 				syncro = true
 	#			action(delta)
-			else: 
-				timer3 -= delta
-				no_gravity()
+			else: #timer2 terminó el jugaor ya no puede mover el dron,
+				pass
+				#timer3 -= delta
+				#no_gravity()
 #Devuelve la gravedad al valor normal
 func gravity_again():
 	syncronize_pos.rpc(position)
 #Hace que el objeto flote
 func no_gravity():
-	gravity_scale = 0.0
+	if gravity_scale != 0.0:
+		gravity_scale = 0.0
 	
 @rpc("any_peer","call_local","reliable")
 func syncronize_pos(pos:Vector2):
-	self.position = pos
-	gravity_scale = 1
+	if gravity_scale != 1.0:
+		gravity_scale = 1.0
+	#self.position = pos
+	
 	
 #Función para realizar una acción
 #En este caso lo haremos explotar
