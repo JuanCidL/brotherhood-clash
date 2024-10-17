@@ -32,11 +32,13 @@ layout_mode = 2
 size_flags_vertical = 10
 
 [node name="VictoryScreen" type="Panel" parent="."]
+top_level = true
 layout_mode = 2
 tooltip_text = "
 "
 
 [node name="Label" type="Label" parent="VictoryScreen"]
+modulate = Color(0, 0, 0, 1)
 layout_mode = 1
 anchors_preset = -1
 anchor_bottom = 0.032
@@ -49,6 +51,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="LoseScreen2" type="Panel" parent="."]
+top_level = true
 layout_mode = 2
 tooltip_text = "
 "

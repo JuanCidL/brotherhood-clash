@@ -41,9 +41,20 @@ func _ready() -> void:
 	
 func _on_health_changed(key: int, value: int):
 	health_bars[key].value -= value
-	if(health_bars[key] <= 0):
-		player.show_lose()
+	if(health_bars[key].value <= 0):
+		print("funcionaa"+str(key))
+		if Game.get_current_player().id == key:
+			print("A este pendejo se le cayó la barra\n")
+			lose_screen.show()
+			#show_lose()
+		else: 
+			print("A este ELSE se le cayó la barra\n")
+			victory_screen.show()
+			#show_victory()
+		
+@rpc("any_peer","call_local","reliable")
 func show_victory():
 	victory_screen.visible = true
+@rpc("any_peer","call_local","reliable")
 func show_lose():
 	lose_screen.visible = true
