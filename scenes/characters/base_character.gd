@@ -1,6 +1,7 @@
 class_name BaseCharacter
 extends Throwable
 
+
 # Character properties
 var health: int = Game.MINION_MAX_HEALTH
 var weapons: Array = Array([], TYPE_OBJECT, "", null)
@@ -81,4 +82,3 @@ func take_damage(value: int):
 	set_collision_mask_value(3, false)
 	await get_tree().create_timer(2).timeout
 	set_collision_mask_value(3, true)
-	
