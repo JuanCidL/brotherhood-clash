@@ -20,7 +20,13 @@ func _ready() -> void:
 		health_bar.max_value = Game.players_health[id]
 		health_bar.value = Game.players_health[id]
 		health_bars[id] = health_bar
-		bottom_box.add_child(health_bar, true)
+		var cp_info = VBoxContainer.new()
+		cp_info.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		var label = Label.new()
+		label.text = 'Role ' + str(Game.players[i].role)
+		cp_info.add_child(label)
+		cp_info.add_child(health_bar, true)
+		bottom_box.add_child(cp_info)
 	# Connect to health signal to change the values on bars
 	Game.health_changed.connect(_on_health_changed)
 	
