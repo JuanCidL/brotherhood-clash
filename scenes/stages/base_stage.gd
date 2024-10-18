@@ -14,7 +14,7 @@ enum GameState{
 
 # Game settings
 @onready var teams_quantity: int = 2
-@onready var minions_quantity: int = 3
+@onready var minions_quantity: int = 1
 @onready var game_state = GameState.CHOOSING
 
 # Players data 
@@ -42,7 +42,7 @@ func _ready() -> void:
 		var id = Game.players[i].id
 		characters[id] = []
 		current_character[id] = 0
-		Game.players_health[id] = Game.MINION_MAX_HEALTH * minions_quantity
+		Game.players_health[id] = Game.MINION_MAX_HEALTH * (minions_quantity+1)
 	player_id = Game.get_current_player().id
 	var cp = randi_range(0, teams_quantity-1)
 	_setup_current_player.rpc(cp)

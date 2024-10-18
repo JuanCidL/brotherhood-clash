@@ -1,9 +1,11 @@
 class_name BaseCharacter
 extends Throwable
 
+
 # Character properties
 var health: int = Game.MINION_MAX_HEALTH
 var weapons: Array = Array([], TYPE_OBJECT, "", null)
+var id: int
 
 # Debug
 var weapon_scene = preload("res://scenes/weapons/weapon_damage.tscn")
@@ -22,6 +24,7 @@ signal on_weapon_spawn(weapon: BaseWeapon)
 # multiplayer setup
 func setup(player_data: Statics.PlayerData) -> void:
 	name = str(player_data.id)
+	id = player_data.id
 	set_multiplayer_authority(player_data.id)
 	disable()
 	enabled.connect(func(value: bool): turn_mark.visible = value)
@@ -61,7 +64,7 @@ func _send_position(pos: Vector2):
 	self.position = pos 
 
 @rpc("authority", "reliable")
-func _on_weapon_instance(arma: BaseWeapon):
+func _on_weapon_instance(arma: PackedScene):
 	if is_instance_valid(weapon_instance):
 		weapon_instance.queue_free()
 	weapon_instance = arma.instantiate()
@@ -77,8 +80,7 @@ func take_damage(value: int):
 		return
 	health -= value
 	health_bar.value -= value
-	Game.take_damage(Game.get_current_player().id, value)
+	Game.take_damage(id, value)
 	set_collision_mask_value(3, false)
 	await get_tree().create_timer(2).timeout
 	set_collision_mask_value(3, true)
-	
