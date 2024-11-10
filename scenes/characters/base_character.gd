@@ -6,6 +6,7 @@ extends Throwable
 var health: int = Game.MINION_MAX_HEALTH
 var weapons: Array = Array([], TYPE_OBJECT, "", null)
 var id: int
+var array: Array[BaseCharacter]
 
 # Debug
 var weapon_scene = preload("res://scenes/weapons/weapon_damage.tscn")
@@ -77,6 +78,9 @@ func _on_weapon_instance(arma: PackedScene):
 @rpc("any_peer", "call_local", "reliable")
 func take_damage(value: int):
 	if health <= 0:
+		if array:
+			array.erase(self)
+			queue_free()
 		return
 	health -= value
 	health_bar.value -= value

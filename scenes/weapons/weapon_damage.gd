@@ -4,6 +4,7 @@ extends BaseWeapon
 @onready var hurt_area: Area2D = $HurtArea
 
 func _ready() -> void:
+	throw_power = 10
 	hurt_area.connect("body_entered", _on_body_entered)
 	
 func _on_body_entered(body: Node2D):
