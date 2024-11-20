@@ -99,7 +99,8 @@ func _placeholder_draw(mouse_pos: Vector2):
 func _handle_place(mouse_pos: Vector2, pid: int):
 	# Instance a new character and setup it in the scene
 	var instance: BaseCharacter = default_player.instantiate()
-	instance.setup(players_data.front())
+	var data: Statics.PlayerData = players_data.front()
+	instance.setup(data, characters[data.id])
 	add_child(instance, true)
 	
 	# Signals detection to handle the turns on move or throw
