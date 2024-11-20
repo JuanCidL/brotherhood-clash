@@ -1,4 +1,6 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://bwgdrcgopd0s1"]
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://bwgdrcgopd0s1"]
+
+[ext_resource type="Texture2D" uid="uid://be1xw1faitmip" path="res://resources/UI_Flat_Frame02a.png" id="1_4r4l7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_suswy"]
 bg_color = Color(0.466181, 0.466181, 0.466181, 1)
@@ -13,6 +15,9 @@ corner_radius_top_left = 15
 corner_radius_top_right = 15
 corner_radius_bottom_right = 15
 corner_radius_bottom_left = 15
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4sh3m"]
+texture = ExtResource("1_4r4l7")
 
 [resource]
 HealthBar/base_type = &"ProgressBar"
@@ -29,3 +34,5 @@ MarginContainerSmall/constants/margin_bottom = 10
 MarginContainerSmall/constants/margin_left = 10
 MarginContainerSmall/constants/margin_right = 10
 MarginContainerSmall/constants/margin_top = 10
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_4sh3m")
+VBoxContainer/constants/separation = 4
