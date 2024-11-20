@@ -2,9 +2,16 @@ class_name BaseWeapon
 extends Throwable
 
 @onready var drag_area: DragAreaNode = $DragArea
+@onready var activation_delay = 0
+@onready var can_effect = false
 
 func _ready() -> void:
 	throw_power = 50
+	drag_area.on_throw.connect(func() -> void :
+		if activation_delay > 0:
+			await get_tree().create_timer(activation_delay).timeout
+		can_effect = true
+	)
 
 
 @rpc("any_peer", "call_local", "reliable")
