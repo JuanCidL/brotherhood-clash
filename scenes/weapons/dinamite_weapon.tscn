@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://ciw0q0t7kjyo1"]
+
+[ext_resource type="Texture2D" uid="uid://tw8t38ns0seh" path="res://icon.svg" id="1_46xly"]
+[ext_resource type="PackedScene" uid="uid://bvyl75y3qnq35" path="res://scenes/utils/drag_area.tscn" id="2_ip28b"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vhnvd"]
+radius = 6.0
+
+[node name="Dinamite" type="RigidBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.094, 0.094)
+texture = ExtResource("1_46xly")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_vhnvd")
+
+[node name="DragArea" parent="." node_paths=PackedStringArray("body") instance=ExtResource("2_ip28b")]
+body = NodePath("")
