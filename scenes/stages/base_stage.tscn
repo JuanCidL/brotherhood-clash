@@ -5,6 +5,8 @@
 
 [node name="BaseStage" type="Node2D"]
 script = ExtResource("1_ft4ue")
+metadata/_edit_horizontal_guides_ = [-146.0, -146.0, 723.0]
+metadata/_edit_vertical_guides_ = [-51.0, 1457.0]
 
 [node name="BasicMap" parent="." instance=ExtResource("1_jq600")]
 
@@ -13,4 +15,7 @@ script = ExtResource("1_ft4ue")
 [node name="Camera2D" type="Camera2D" parent="CanvasLayer"]
 position = Vector2(704, 260)
 scale = Vector2(-204.103, 8.55589)
-zoom = Vector2(0.45, 0.45)
+limit_left = -50
+limit_top = -146
+limit_right = 1456
+limit_bottom = 724

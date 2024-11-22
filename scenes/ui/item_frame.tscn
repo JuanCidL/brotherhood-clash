@@ -1,0 +1,59 @@
+[gd_scene load_steps=3 format=3 uid="uid://vh0b2gynnv58"]
+
+[ext_resource type="Texture2D" uid="uid://dwco3d6wfwti1" path="res://resources/pj_sinfondo.png" id="2_hwenp"]
+
+[sub_resource type="GDScript" id="GDScript_wrkbf"]
+script/source = "class_name ItemFrame
+extends Button
+
+#@onready var image
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[node name="ItemFrame" type="Button"]
+clip_contents = true
+custom_minimum_size = Vector2(128, 128)
+offset_right = 128.0
+offset_bottom = 128.0
+size_flags_horizontal = 6
+size_flags_vertical = 6
+script = SubResource("GDScript_wrkbf")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+offset_right = 128.0
+offset_bottom = 128.0
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="Image" type="TextureRect" parent="MarginContainer"]
+layout_mode = 2
+texture = ExtResource("2_hwenp")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_type_variation = &"ItemLabel"
+text = "Launch"
+metadata/_edit_group_ = true
+
+[node name="Quantity" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_type_variation = &"ItemLabel"
+text = "0
+"
