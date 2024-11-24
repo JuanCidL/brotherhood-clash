@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://boqg4w31y3jdk"]
+
+[ext_resource type="Script" path="res://scenes/weapons/virus_bomb_weapon.gd" id="1_eqbpm"]
+[ext_resource type="Texture2D" uid="uid://c7bq5c7cbthoa" path="res://resources/weapons/Angryvirus6.png" id="2_wj28p"]
+[ext_resource type="PackedScene" uid="uid://bvyl75y3qnq35" path="res://scenes/utils/drag_area.tscn" id="3_rb4hi"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x4ss7"]
+radius = 6.0
+
+[node name="VirusBombWeapon" type="RigidBody2D"]
+script = ExtResource("1_eqbpm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.462745, 1, 0.427451, 1)
+position = Vector2(-2, 3)
+scale = Vector2(0.04, 0.04)
+texture = ExtResource("2_wj28p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_x4ss7")
+
+[node name="DragArea" parent="." instance=ExtResource("3_rb4hi")]
