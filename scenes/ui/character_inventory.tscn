@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cc60abixblx4k"]
+[gd_scene load_steps=5 format=3 uid="uid://cc60abixblx4k"]
 
+[ext_resource type="Script" path="res://scenes/ui/character_inventory.gd" id="1_ysyb8"]
 [ext_resource type="Texture2D" uid="uid://b1wdpjaufy61e" path="res://assets/fx/hand_close_pointer.png" id="2_c5li0"]
+[ext_resource type="PackedScene" uid="uid://vh0b2gynnv58" path="res://scenes/ui/item_frame.tscn" id="2_pp6hs"]
 [ext_resource type="Texture2D" uid="uid://tw8t38ns0seh" path="res://icon.svg" id="3_5oq40"]
 
 [node name="CharacterInventory" type="Control"]
@@ -12,6 +14,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+script = ExtResource("1_ysyb8")
 
 [node name="SelectContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -34,10 +37,11 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Panel" type="ItemList" parent="SelectContainer"]
+visible = false
 custom_minimum_size = Vector2(288, 0)
 layout_mode = 2
 auto_height = true
-text_overrun_behavior = 4
+text_overrun_behavior = 2
 item_count = 2
 max_columns = 3
 icon_mode = 0
@@ -47,19 +51,22 @@ item_0/icon = ExtResource("2_c5li0")
 item_1/text = "Damage"
 item_1/icon = ExtResource("3_5oq40")
 
-[node name="OpenButton" type="Button" parent="."]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -64.0
-offset_top = -64.0
-grow_horizontal = 0
-grow_vertical = 0
-theme_type_variation = &"SelectButton"
-icon = ExtResource("3_5oq40")
-icon_alignment = 1
-expand_icon = true
+[node name="Inventory" type="PanelContainer" parent="SelectContainer"]
+layout_mode = 2
+
+[node name="InventoryGrid" type="MarginContainer" parent="SelectContainer/Inventory"]
+layout_mode = 2
+
+[node name="ItemContainer" type="GridContainer" parent="SelectContainer/Inventory/InventoryGrid"]
+layout_mode = 2
+theme_override_constants/h_separation = 32
+theme_override_constants/v_separation = 32
+columns = 4
+
+[node name="ItemFrame" parent="SelectContainer/Inventory/InventoryGrid/ItemContainer" instance=ExtResource("2_pp6hs")]
+layout_mode = 2
+text_name = "Damage"
+
+[node name="ItemFrame2" parent="SelectContainer/Inventory/InventoryGrid/ItemContainer" instance=ExtResource("2_pp6hs")]
+layout_mode = 2
+text_name = "Dron"

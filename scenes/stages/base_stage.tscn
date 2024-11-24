@@ -5,8 +5,6 @@
 
 [node name="BaseStage" type="Node2D"]
 script = ExtResource("1_ft4ue")
-metadata/_edit_horizontal_guides_ = [-146.0, -146.0, 723.0]
-metadata/_edit_vertical_guides_ = [-51.0, 1457.0]
 
 [node name="BasicMap" parent="." instance=ExtResource("1_jq600")]
 

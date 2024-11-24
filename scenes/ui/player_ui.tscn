@@ -1,6 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://m2peow0rpk87"]
+[gd_scene load_steps=6 format=3 uid="uid://m2peow0rpk87"]
 
 [ext_resource type="Script" path="res://scenes/ui/player_ui.gd" id="1_oe7fk"]
+[ext_resource type="PackedScene" uid="uid://cc60abixblx4k" path="res://scenes/ui/character_inventory.tscn" id="2_wvtpv"]
+[ext_resource type="Texture2D" uid="uid://tw8t38ns0seh" path="res://icon.svg" id="3_tu8pf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ygywu"]
 bg_color = Color(0, 0, 0, 1)
@@ -38,6 +40,7 @@ layout_mode = 2
 size_flags_vertical = 10
 
 [node name="VictoryScreen" type="Panel" parent="."]
+visible = false
 self_modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 tooltip_text = "
@@ -57,6 +60,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="LoseScreen2" type="Panel" parent="."]
+visible = false
 layout_mode = 2
 tooltip_text = "
 "
@@ -73,3 +77,18 @@ offset_bottom = 223.672
 text = "LOSE"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="CharacterInventory" parent="." instance=ExtResource("2_wvtpv")]
+visible = false
+layout_mode = 2
+
+[node name="InventoryButton" type="Button" parent="."]
+visible = false
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_type_variation = &"SelectButton"
+disabled = true
+icon = ExtResource("3_tu8pf")
+expand_icon = true

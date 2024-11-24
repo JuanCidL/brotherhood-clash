@@ -14,6 +14,10 @@ const HEALTH_BAR_SCENE = preload("res://scenes/ui/health_bar.tscn")
 @onready var victory_screen = $VictoryScreen
 @onready var lose_screen = $LoseScreen2
 
+# Inventory
+@onready var character_inventory: Control = $CharacterInventory
+@onready var inventory_button: Button = $InventoryButton
+@onready var character: BaseCharacter # Character to get the quantities
 
 func _ready() -> void:
 	victory_screen.visible = false
@@ -58,3 +62,16 @@ func show_victory():
 @rpc("any_peer","call_local","reliable")
 func show_lose():
 	lose_screen.visible = true
+	
+func show_inventory_button() -> void:
+	inventory_button.show()
+	inventory_button.disabled = false
+
+func hide_inventory_button() -> void:
+	inventory_button.hide()
+	inventory_button.disabled = true
+	
+	
+func show_inventory() -> void:
+	character_inventory.show()
+	
