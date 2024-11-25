@@ -30,7 +30,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 theme_type_variation = &"ItemLabel"
-text = "Launch"
+text = "Name"
 
 [node name="Quantity" type="Label" parent="MarginContainer"]
 layout_mode = 2

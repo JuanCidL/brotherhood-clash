@@ -1,6 +1,7 @@
-[gd_resource type="Theme" load_steps=12 format=3 uid="uid://bwgdrcgopd0s1"]
+[gd_resource type="Theme" load_steps=13 format=3 uid="uid://bwgdrcgopd0s1"]
 
 [ext_resource type="Texture2D" uid="uid://be1xw1faitmip" path="res://resources/UI_Flat_Frame02a.png" id="1_4r4l7"]
+[ext_resource type="FontFile" uid="uid://d2y1msmb8h400" path="res://resources/monogram.ttf" id="2_ntwbm"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_suswy"]
 bg_color = Color(0.466181, 0.466181, 0.466181, 1)
@@ -104,13 +105,16 @@ HealthBar/styles/fill = SubResource("StyleBoxFlat_lkbfl")
 ItemLabel/base_type = &"Label"
 ItemLabel/colors/font_color = Color(0.75, 0.75, 0.09, 1)
 ItemLabel/constants/outline_size = 4
-ItemLabel/font_sizes/font_size = 16
+ItemLabel/font_sizes/font_size = 32
 ItemList/styles/focus = SubResource("StyleBoxTexture_ls83i")
 ItemList/styles/hovered = SubResource("StyleBoxFlat_5fwa2")
 ItemList/styles/panel = SubResource("StyleBoxTexture_ls83i")
 ItemList/styles/selected = SubResource("StyleBoxFlat_7nhfc")
 ItemList/styles/selected_focus = SubResource("StyleBoxFlat_7nhfc")
-Label/font_sizes/font_size = 32
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/constants/outline_size = 6
+Label/font_sizes/font_size = 64
+Label/fonts/font = ExtResource("2_ntwbm")
 MarginContainer/constants/margin_bottom = 20
 MarginContainer/constants/margin_left = 20
 MarginContainer/constants/margin_right = 20

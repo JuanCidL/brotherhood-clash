@@ -9,6 +9,7 @@ const MAX_MINION_QUANTITY = 5
 
 # Game states to handle the stage state
 enum GameState{
+	INIT,
 	CHOOSING_PLACE,
 	CHOOSING_WEAPON,
 	PLAYING,
@@ -18,7 +19,7 @@ enum GameState{
 # Game settings
 @onready var teams_quantity: int = 2
 @onready var minions_quantity: int = 1
-@onready var game_state = GameState.CHOOSING_PLACE
+@onready var game_state = GameState.INIT
 
 # Players data 
 @onready var players_data: Array[Statics.PlayerData] = []
@@ -27,15 +28,17 @@ enum GameState{
 # Characters data (Minions + Captain for each player)
 @onready var characters: Dictionary # player_id: int -> characters: Array[BaseCharacter] // Map player id to player's characters
 
-@onready var default_player = RoleMap.map[Statics.Role.NONE]
+@onready var default_character = MapUtils.role_to_character[Statics.Role.NONE]
 @onready var sprite_placeholder: Sprite2D
 
 # UI
 @onready var canvas: CanvasLayer
 @onready var player_ui: PlayerUI
+@onready var timer_init: SceneTreeTimer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	timer_init = get_tree().create_timer(5)
 	_placeholder_setup()
 	teams_quantity = Game.players.size()
 	for i in Game.players.size():
@@ -53,8 +56,13 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	
 	var mouse_pos = get_local_mouse_position()
+
 		
 	match game_state:
+		GameState.INIT:
+			if timer_init.time_left > 0:
+				var rounded_time = round(timer_init.time_left)
+				player_ui.game_hint.text = 'Starts in ' + str(rounded_time) + " seconds"
 		GameState.CHOOSING_PLACE:
 			if player_id == players_data.front().id:
 				_placeholder_draw.rpc(mouse_pos)
@@ -66,13 +74,19 @@ func _process(delta: float) -> void:
 		GameState.PLAYING:
 			if player_id == players_data.front().id:
 				var character: BaseCharacter = characters[player_id].front()
-				if not character.is_enabled:
+				if not character.is_enabled and character.player_state == BaseCharacter.PlayerState.IDLE:
 					character.enable.rpc()
+					player_ui.set_hint_text(str(players_data[character.id].role) + ' turn')
+					
 
 # call the only the random value of host 
 @rpc('call_local', 'any_peer', 'reliable')
 func _setup_current_player(cp: int):
 	players_data.push_front(players_data.pop_at(cp))
+	await timer_init.timeout
+	player_ui.turn_text.text = 'Role ' + str(players_data.front().role) + ' turn'
+	player_ui.set_hint_text(str(players_data.front().role) + ' turn')
+	game_state = GameState.CHOOSING_PLACE
 	
 # Function to setup player UI
 func _setup_ui():
@@ -80,8 +94,6 @@ func _setup_ui():
 	add_child(canvas, true)
 	player_ui = PLAYER_UI.instantiate()
 	canvas.add_child(player_ui, true)
-	await get_tree().create_timer(2).timeout
-	player_ui.turn_text.text = 'Role ' + str(players_data.front().role) + ' turn'
 
 # function to setup the placeholder spawn indicator
 func _placeholder_setup():
@@ -100,13 +112,29 @@ func _placeholder_draw(mouse_pos: Vector2):
 @rpc("any_peer", "call_local", "reliable")
 func _handle_place(mouse_pos: Vector2, pid: int):
 	# Instance a new character and setup it in the scene
-	var instance: BaseCharacter = default_player.instantiate()
+	var instance: BaseCharacter = default_character.instantiate()
 	var data: Statics.PlayerData = players_data.front()
-	instance.setup(data, self)
+	instance.setup(data)
 	add_child(instance, true)
+	if Game.get_current_player().id == instance.id:
+		instance.enabled.connect(func(value: bool) -> void:
+			if value:
+				show_inventory_button()
+			else:
+				hide_inventory_button()
+		)
+		player_ui.weapon_selected.connect(func(weapon: PackedScene) -> void:
+			if not instance.is_enabled:
+				return
+			instance.disable.rpc()
+			instance.on_weapon_instance(weapon)
+			instance.change_state(BaseCharacter.PlayerState.WEAPON_THROWING)
+		)
 
 	# Add to world
 	instance.global_position = mouse_pos
+	instance.weapon_action.connect(_on_weapon_action)
+	instance.die_signal.connect(_on_character_die)
 	characters[pid].append(instance)
 
 	# change turn
@@ -123,10 +151,12 @@ func _handle_place(mouse_pos: Vector2, pid: int):
 
 # Handle the character turn with the current player id
 @rpc('any_peer', 'call_local', 'reliable')
-func handle_character_turn(pid: int):
+func _handle_character_turn(pid: int):
 	# Disable the current character
+	var id = players_data.front().id
 	var character: BaseCharacter = characters[pid].pop_front()
 	character.disable()
+	character.focus_disable.emit()
 	characters[pid].push_back(character)
 	
 	_change_turn()
@@ -146,12 +176,34 @@ func _change_turn():
 	players_data.push_back(current_player)
 	current_player = players_data.front()
 	player_ui.turn_text.text = 'Role ' + str(current_player.role) + ' turn'
+	# Change hint text
+	player_ui.set_hint_text(str(current_player.role) + ' turn')
+	
+# Character die handler
+func _on_character_die(character: BaseCharacter):
+	# pop from array and free
+	characters[character.id].erase(character)
+	character.queue_free()
+	
+# Handle after action weapon
+func _on_weapon_action(character: BaseCharacter, weapon: BaseWeapon) -> void:
+	hide_inventory_button()
+	# Wait until time ends and then change turn
+	player_ui.set_weapon_action_time.rpc(weapon.action_time)
+	await get_tree().create_timer(weapon.action_time).timeout
+	_handle_character_turn.rpc(character.id)
+
 
 func _set_game_state(st: GameState):
 	game_state = st
 
+
+# Inventory handling
 func show_inventory_button() -> void:
 	player_ui.show_inventory_button()
+	
+func hide_inventory_button() -> void:
+	player_ui.hide_inventory_button()
 	
 func show_inventory() -> void:
 	player_ui.show_inventory()
