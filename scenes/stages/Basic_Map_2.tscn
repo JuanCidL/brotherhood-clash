@@ -22,8 +22,8 @@ scale = Vector2(2, 2)
 modulate = Color(0.523671, 0.679482, 0.988389, 1)
 show_behind_parent = true
 z_index = -4
-position = Vector2(704, 352)
-scale = Vector2(2.93333, 2.58824)
+position = Vector2(703, 264)
+scale = Vector2(3.14583, 3.2353)
 texture = ExtResource("4_nngdb")
 
 [node name="Tree1" parent="." instance=ExtResource("5_t1ayd")]
