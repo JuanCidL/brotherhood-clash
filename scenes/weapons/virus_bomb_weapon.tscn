@@ -11,12 +11,14 @@ radius = 6.0
 script = ExtResource("1_eqbpm")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.462745, 1, 0.427451, 1)
+modulate = Color(1, 0.258824, 0, 1)
 position = Vector2(-2, 3)
 scale = Vector2(0.04, 0.04)
 texture = ExtResource("2_wj28p")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_x4ss7")
 
 [node name="DragArea" parent="." instance=ExtResource("3_rb4hi")]
+visible = false

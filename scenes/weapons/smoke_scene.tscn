@@ -8,7 +8,7 @@
 size = Vector2(375, 163)
 
 [node name="SmokeScene" type="Node2D"]
-modulate = Color(0.572549, 1, 0.301961, 1)
+modulate = Color(1, 0.258824, 0, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.690196)
@@ -26,13 +26,6 @@ modulate = Color(1, 1, 1, 0.486275)
 position = Vector2(100, -10)
 texture = ExtResource("2_1e5dq")
 
-[node name="Area2D" type="Area2D" parent="."]
-visible = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-0.5, -16.5)
-shape = SubResource("RectangleShape2D_0jtb0")
-
 [node name="Espora" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.333333)
 position = Vector2(-153, 9)
@@ -43,7 +36,6 @@ texture = ExtResource("3_v0rpa")
 [node name="Espora5" type="Sprite2D" parent="Espora"]
 position = Vector2(1810.58, 273.691)
 rotation = 0.305433
-scale = Vector2(1, 1)
 texture = ExtResource("3_v0rpa")
 
 [node name="Espora2" type="Sprite2D" parent="Espora"]
@@ -78,3 +70,10 @@ texture = ExtResource("3_v0rpa")
 position = Vector2(2868.25, 2797.1)
 rotation = 0.785398
 texture = ExtResource("3_v0rpa")
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.5, -16.5)
+shape = SubResource("RectangleShape2D_0jtb0")
