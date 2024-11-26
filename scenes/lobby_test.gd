@@ -67,4 +67,4 @@ func _on_start_game_timeout() -> void:
 
 @rpc("reliable", "call_local")
 func start_game() -> void:
-	get_tree().change_scene_to_file("res://scenes/stages/test/test_with_map.tscn")
+	get_tree().change_scene_to_file("res://scenes/stages/base_stage.tscn")
