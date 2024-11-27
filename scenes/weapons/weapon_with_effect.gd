@@ -11,6 +11,11 @@ func _ready() -> void:
 	timer = stop_time
 	throw_power = 10
 	effect_power = 100
+	drag_area.on_throw.connect(func() -> void :
+		if activation_delay > 0:
+			await get_tree().create_timer(activation_delay).timeout
+		can_effect = true
+	)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
