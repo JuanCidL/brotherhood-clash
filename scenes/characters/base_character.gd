@@ -12,6 +12,8 @@ var array: Array
 var weapon_scene = preload("res://scenes/weapons/weapon_damage.tscn")
 var dron_scene = preload("res://scenes/weapons/dron_weapon.tscn")
 var dinamite_scene = preload("res://scenes/weapons/dinamite_weapon.tscn")
+var poison_flask_scene = preload("res://scenes/weapons/poison_flask_weapon.tscn")
+var virus_bomb_scene = preload("res://scenes/weapons/virus_bomb_weapon.tscn")
 var weapon_instance: BaseWeapon = null
 
 @onready var weapon_spawn: Marker2D = $WeaponSpawn
@@ -55,9 +57,9 @@ func _input(event: InputEvent) -> void:
 		if event.is_action_released("number_3"):
 			_on_weapon_instance(dinamite_scene)
 		if event.is_action_released("number_4"):
-			_on_weapon_instance(weapon_scene)
+			_on_weapon_instance(poison_flask_scene)
 		if event.is_action_released("number_5"):
-			_on_weapon_instance(weapon_scene)
+			_on_weapon_instance(virus_bomb_scene)
 		
 
 # Phisics
@@ -95,5 +97,5 @@ func take_damage(value: int):
 	await get_tree().create_timer(2).timeout
 	set_collision_mask_value(3, true)
 	
-func push(direction: Vector2, impulse: float) -> void:
-	velocity += direction * impulse
+#func push(direction: Vector2, impulse: float) -> void:
+#	velocity += direction * impulse

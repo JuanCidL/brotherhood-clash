@@ -47,7 +47,7 @@ offset_bottom = -50.0
 show_percentage = false
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://scenes/weapons/base_weapon.tscn", "res://scenes/weapons/weapon_damage.tscn", "res://scenes/weapons/dron_weapon.tscn")
+_spawnable_scenes = PackedStringArray("res://scenes/weapons/base_weapon.tscn", "res://scenes/weapons/weapon_damage.tscn", "res://scenes/weapons/dron_weapon.tscn", "res://scenes/weapons/dinamite_weapon.tscn", "res://scenes/weapons/poison_flask_weapon.tscn", "res://scenes/weapons/virus_bomb_weapon.tscn")
 spawn_path = NodePath("../Node")
 
 [node name="Node" type="Node" parent="."]
