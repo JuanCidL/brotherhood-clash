@@ -27,8 +27,8 @@ position = Vector2(0, 3.565)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("3_o2x1a")
 
-[node name="DragArea" parent="." instance=ExtResource("3_ynahp")]
-visible = false
+[node name="DragArea" parent="." node_paths=PackedStringArray("body") instance=ExtResource("3_ynahp")]
+body = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -1)

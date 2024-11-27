@@ -15,12 +15,13 @@ script = ExtResource("1_eqbpm")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 0.258824, 0, 1)
-position = Vector2(-0.865, 1.21)
-scale = Vector2(0.015, 0.015)
+position = Vector2(-2.88, 4.14)
+scale = Vector2(0.05, 0.05)
 texture = ExtResource("2_wj28p")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(3.365, 3.365)
 shape = SubResource("CircleShape2D_x4ss7")
 
-[node name="DragArea" parent="." instance=ExtResource("3_rb4hi")]
-visible = false
+[node name="DragArea" parent="." node_paths=PackedStringArray("body") instance=ExtResource("3_rb4hi")]
+body = NodePath("..")

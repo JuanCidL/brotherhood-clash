@@ -5,6 +5,7 @@ extends WeaponWithEffect
 @onready var impulse = 500
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	super._ready()
 	effect_power = 100
 
 #Funcion para hacer especificamente lo que se quiere de DinamiteWeapon
@@ -15,5 +16,8 @@ func weapon_effect(power: float) -> void:
 		if node.has_method("take_damage"):
 			node.take_damage(power - global_position.distance_to(node.global_position))
 			node.apply_central_impulse(global_position.direction_to(node.global_position))
-		await get_tree().create_timer(1).timeout
+		await get_tree().create_timer(5).timeout
 		queue_free()
+# Recuperar animation player en el codigo
+# Hacer un timer await get_tree().create_timer(5).timeout
+	nodo_AnimationPlayer.play("explosion")

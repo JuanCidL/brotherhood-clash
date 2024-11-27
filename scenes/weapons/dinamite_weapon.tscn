@@ -63,7 +63,8 @@ texture = ExtResource("2_kwx54")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_vhnvd")
 
-[node name="DragArea" parent="." instance=ExtResource("2_ip28b")]
+[node name="DragArea" parent="." node_paths=PackedStringArray("body") instance=ExtResource("2_ip28b")]
+body = NodePath("..")
 
 [node name="ExplosionArea" type="Area2D" parent="."]
 
@@ -71,6 +72,7 @@ shape = SubResource("CircleShape2D_vhnvd")
 shape = SubResource("CircleShape2D_fdi6q")
 
 [node name="Sprite2D" type="Sprite2D" parent="ExplosionArea"]
+visible = false
 scale = Vector2(5, 5)
 texture = ExtResource("4_xh6om")
 hframes = 7
