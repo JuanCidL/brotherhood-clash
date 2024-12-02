@@ -7,8 +7,11 @@ const PLACEHOLDER_SPRITE = preload("res://resources/pj_sinfondo.png")
 const MIN_MINION_QUANTITY = 3
 const MAX_MINION_QUANTITY = 5
 
+# Game states to handle the stage state
 enum GameState{
-	CHOOSING,
+	INIT,
+	CHOOSING_PLACE,
+	CHOOSING_WEAPON,
 	PLAYING,
 	END
 }
@@ -16,7 +19,7 @@ enum GameState{
 # Game settings
 @onready var teams_quantity: int = 2
 @onready var minions_quantity: int = 1
-@onready var game_state = GameState.CHOOSING
+@onready var game_state = GameState.INIT
 
 # Players data 
 @onready var players_data: Array[Statics.PlayerData] = []
@@ -25,15 +28,17 @@ enum GameState{
 # Characters data (Minions + Captain for each player)
 @onready var characters: Dictionary # player_id: int -> characters: Array[BaseCharacter] // Map player id to player's characters
 
-@onready var default_player = RoleMap.map[Statics.Role.NONE]
+@onready var default_character = MapUtils.role_to_character[Statics.Role.NONE]
 @onready var sprite_placeholder: Sprite2D
 
 # UI
 @onready var canvas: CanvasLayer
 @onready var player_ui: PlayerUI
+@onready var timer_init: SceneTreeTimer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	timer_init = get_tree().create_timer(5)
 	_placeholder_setup()
 	teams_quantity = Game.players.size()
 	for i in Game.players.size():
@@ -42,43 +47,53 @@ func _ready() -> void:
 		characters[id] = []
 		Game.players_health[id] = Game.MINION_MAX_HEALTH * (minions_quantity+1)
 	player_id = Game.get_current_player().id
-	var cp = randi_range(0, teams_quantity-1)
-	#_setup_current_player.rpc(cp)
+	if Game.get_current_player().id == 1:
+		var cp = randi_range(0, teams_quantity-1)
+		_setup_current_player.rpc(cp)
 	_setup_ui()
 
 
 func _process(delta: float) -> void:
 	
 	var mouse_pos = get_local_mouse_position()
+
 		
 	match game_state:
-		GameState.CHOOSING:
+		GameState.INIT:
+			if timer_init.time_left > 0:
+				var rounded_time = round(timer_init.time_left)
+				player_ui.game_hint.text = 'Starts in ' + str(rounded_time) + " seconds"
+		GameState.CHOOSING_PLACE:
 			if player_id == players_data.front().id:
 				_placeholder_draw.rpc(mouse_pos)
 				if Input.is_action_just_pressed("click"):
 					_handle_place.rpc(mouse_pos, player_id)
+		GameState.CHOOSING_WEAPON:
+			if player_id == players_data.front().id:
+				pass
 		GameState.PLAYING:
 			if player_id == players_data.front().id:
 				var character: BaseCharacter = characters[player_id].front()
-				#if not character.drag_area.enabled:
-				if not character.is_enabled:
-					#character.drag_area.enabled = true
+				if not character.is_enabled and character.player_state == BaseCharacter.PlayerState.IDLE:
 					character.enable.rpc()
+					player_ui.set_hint_text(str(players_data[character.id].role) + ' turn')
+					
 
 # call the only the random value of host 
-#@rpc('authority', 'call_local', 'reliable')
-#func _setup_current_player(cp: int):
-	#current_player = cp
+@rpc('call_local', 'any_peer', 'reliable')
+func _setup_current_player(cp: int):
+	players_data.push_front(players_data.pop_at(cp))
+	await timer_init.timeout
+	player_ui.turn_text.text = 'Role ' + str(players_data.front().role) + ' turn'
+	player_ui.set_hint_text(str(players_data.front().role) + ' turn')
+	game_state = GameState.CHOOSING_PLACE
 	
 # Function to setup player UI
 func _setup_ui():
-	# Ui setup
-	#Debug.log("Role %s" % Game.players[current_player].role, 3)
 	canvas = CanvasLayer.new()
 	add_child(canvas, true)
 	player_ui = PLAYER_UI.instantiate()
 	canvas.add_child(player_ui, true)
-	player_ui.turn_text.text = 'Role ' + str(players_data.front().role) + ' turn'
 
 # function to setup the placeholder spawn indicator
 func _placeholder_setup():
@@ -94,33 +109,36 @@ func _placeholder_draw(mouse_pos: Vector2):
 	sprite_placeholder.global_position = mouse_pos
 
 # function to spawn the character instances in all game instances and save it in Map structs
-# it alse manage the turns increasing the current character index on the specific player
 @rpc("any_peer", "call_local", "reliable")
 func _handle_place(mouse_pos: Vector2, pid: int):
 	# Instance a new character and setup it in the scene
-	var instance: BaseCharacter = default_player.instantiate()
+	var instance: BaseCharacter = default_character.instantiate()
 	var data: Statics.PlayerData = players_data.front()
-	instance.setup(data, characters[data.id])
+	instance.setup(data)
 	add_child(instance, true)
-	
-	# Signals detection to handle the turns on move or throw
-	instance.drag_area.on_throw.connect(func() -> void:
-		instance.disable.rpc()
-		_handle_turn(pid)
-	)
-	instance.on_weapon_spawn.connect(func(weapon: BaseWeapon) -> void:
-		instance.disable()
-		weapon.drag_area.on_throw.connect(func() -> void:
-			weapon.disable.rpc()
-			_handle_turn.rpc(pid)
+	if Game.get_current_player().id == instance.id:
+		instance.enabled.connect(func(value: bool) -> void:
+			if value:
+				show_inventory_button()
+			else:
+				hide_inventory_button()
 		)
-	)
+		player_ui.weapon_selected.connect(func(weapon: PackedScene) -> void:
+			if not instance.is_enabled:
+				return
+			instance.disable.rpc()
+			instance.on_weapon_instance(weapon)
+			instance.change_state(BaseCharacter.PlayerState.WEAPON_THROWING)
+		)
+
 	# Add to world
 	instance.global_position = mouse_pos
+	instance.weapon_action.connect(_on_weapon_action)
+	instance.die_signal.connect(_on_character_die)
 	characters[pid].append(instance)
-	#instance.array = characters[pid] 
-	
-	_handle_turn(pid)
+
+	# change turn
+	_change_turn()
 	
 	var count: int = 0
 	for arr in characters.values():
@@ -128,58 +146,64 @@ func _handle_place(mouse_pos: Vector2, pid: int):
 			break 
 		count+=1
 	if count==teams_quantity:
-		_set_playing_state()
+		_set_game_state(GameState.PLAYING)
+		sprite_placeholder.hide()
 
+# Handle the character turn with the current player id
 @rpc('any_peer', 'call_local', 'reliable')
-func _handle_turn(pid: int):
-	####
-	##LISTO
-	#if game_state == GameState.PLAYING:
-		#var character: BaseCharacter = characters[pid][current_character[pid]]
-		#character.disable.rpc()
-	#
-	##YA NO VA
-	#var new_character_index = current_character[pid] + 1
-	#if new_character_index >= characters[pid].size():
-		#new_character_index = 0
-	#current_character[pid] = new_character_index
-	#
-	##LISTO
-	#var new_player_index = current_player + 1
-	#if new_player_index >= players_data.size():
-		#new_player_index = 0
-	#current_player = new_player_index
-	#
-	#
-	#if game_state == GameState.PLAYING:
-		#var new_player_id = players_data[current_player].id
-		#var character: BaseCharacter = characters[new_player_id][current_character[new_player_id]]
-		#character.enable.rpc()
-	####
-	
+func _handle_character_turn(pid: int):
 	# Disable the current character
-	if game_state == GameState.PLAYING:
-		var character: BaseCharacter = characters[pid].pop_front()
-		character.disable()
-		characters[pid].push_back(character)
+	var id = players_data.front().id
+	var character: BaseCharacter = characters[pid].pop_front()
+	character.disable()
+	character.focus_disable.emit()
+	characters[pid].push_back(character)
 	
-	# Change player turn
+	_change_turn()
+	
+	# Next character turn
+	var current_player: Statics.PlayerData = players_data.front()
+	var new_id = current_player.id
+	if characters[new_id].is_empty():
+		game_state = GameState.END
+	var current_character: BaseCharacter = characters[new_id].front()
+	current_character.enable()
+
+# function to change player turn
+@rpc('any_peer', 'call_local', 'reliable')
+func _change_turn():
 	var current_player: Statics.PlayerData = players_data.pop_front()
 	players_data.push_back(current_player)
 	current_player = players_data.front()
-	
-	# Next character turn
-	if game_state == GameState.PLAYING:
-		var new_id = current_player.id
-		if characters[new_id].is_empty():
-			game_state = GameState.END
-		var current_character: BaseCharacter = characters[new_id].front()
-		current_character.enable()
-	
-		
 	player_ui.turn_text.text = 'Role ' + str(current_player.role) + ' turn'
+	# Change hint text
+	player_ui.set_hint_text(str(current_player.role) + ' turn')
 	
+# Character die handler
+func _on_character_die(character: BaseCharacter):
+	# pop from array and free
+	characters[character.id].erase(character)
+	character.queue_free()
+	
+# Handle after action weapon
+func _on_weapon_action(character: BaseCharacter, weapon: BaseWeapon) -> void:
+	hide_inventory_button()
+	# Wait until time ends and then change turn
+	player_ui.set_weapon_action_time.rpc(weapon.action_time)
+	await get_tree().create_timer(weapon.action_time).timeout
+	_handle_character_turn.rpc(character.id)
 
-func _set_playing_state():
-	game_state = GameState.PLAYING
-	sprite_placeholder.hide()
+
+func _set_game_state(st: GameState):
+	game_state = st
+
+
+# Inventory handling
+func show_inventory_button() -> void:
+	player_ui.show_inventory_button()
+	
+func hide_inventory_button() -> void:
+	player_ui.hide_inventory_button()
+	
+func show_inventory() -> void:
+	player_ui.show_inventory()
