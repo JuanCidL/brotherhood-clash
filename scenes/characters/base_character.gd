@@ -6,6 +6,7 @@ extends Throwable
 var health: int = Game.MINION_MAX_HEALTH
 var weapons: Array = Array([], TYPE_OBJECT, "", null)
 var id: int
+var array: Array
 
 # Debug
 var weapon_scene = preload("res://scenes/weapons/weapon_damage.tscn")
@@ -21,16 +22,23 @@ signal on_weapon_spawn(weapon: BaseWeapon)
 @onready var health_bar: ProgressBar = $HealthBar
 @onready var turn_mark: Line2D = $Pivot/TurnMark
 
+# sync
+@onready var replication_timer: Timer = $ReplicationTimer
+
 # multiplayer setup
-func setup(player_data: Statics.PlayerData) -> void:
+func setup(player_data: Statics.PlayerData, arr) -> void:
 	name = str(player_data.id)
 	id = player_data.id
 	set_multiplayer_authority(player_data.id)
 	disable()
 	enabled.connect(func(value: bool): turn_mark.visible = value)
+	array = arr
 
 func _ready() -> void:
 	throw_power = 10
+	var delay = randf()*0.5
+	await get_tree().create_timer(delay).timeout
+	replication_timer.timeout.connect(func() -> void: _replicate.rpc(self.position, self.linear_velocity))
 	
 # Input management
 func _input(event: InputEvent) -> void:
@@ -56,12 +64,12 @@ func _input(event: InputEvent) -> void:
 # Phisics
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
-	#if weapon_instance.action_state == true:
-		#weapon_instance.queue_free()
+	
 
-@rpc
-func _send_position(pos: Vector2):
+@rpc("authority", "call_remote")
+func _replicate(pos: Vector2, vel: Vector2):
 	self.position = pos 
+	self.linear_velocity = vel
 
 @rpc("authority", "reliable")
 func _on_weapon_instance(arma: PackedScene):
@@ -77,6 +85,9 @@ func _on_weapon_instance(arma: PackedScene):
 @rpc("any_peer", "call_local", "reliable")
 func take_damage(value: int):
 	if health <= 0:
+		if array:
+			array.erase(self)
+			queue_free()
 		return
 	health -= value
 	health_bar.value -= value

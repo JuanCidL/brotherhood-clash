@@ -51,3 +51,7 @@ _spawnable_scenes = PackedStringArray("res://scenes/weapons/base_weapon.tscn", "
 spawn_path = NodePath("../Node")
 
 [node name="Node" type="Node" parent="."]
+
+[node name="ReplicationTimer" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
