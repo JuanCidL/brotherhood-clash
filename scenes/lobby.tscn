@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/lobby.gd" id="1_g2fmt"]
 [ext_resource type="PackedScene" uid="uid://chbh4lxk8rmmd" path="res://scenes/ui/lobby_player.tscn" id="2_060bj"]
-[ext_resource type="FontVariation" uid="uid://bt8ntslo7crfo" path="res://resources/mono.tres" id="3_c3sgj"]
+[ext_resource type="FontVariation" path="res://resources/mono.tres" id="3_c3sgj"]
 
 [node name="Lobby" type="MarginContainer"]
 anchors_preset = 15
@@ -145,6 +145,13 @@ text = "Role B"
 [node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/Menus/ReadyMenu"]
 layout_mode = 2
 
+[node name="MapR" type="Button" parent="PanelContainer/Menus/ReadyMenu/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Random
+"
+
 [node name="Map1" type="Button" parent="PanelContainer/Menus/ReadyMenu/HBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -157,6 +164,12 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Ebria"
+
+[node name="Map3" type="Button" parent="PanelContainer/Menus/ReadyMenu/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Cafeta"
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="PanelContainer/Menus/ReadyMenu"]
 layout_mode = 2
@@ -197,3 +210,4 @@ theme_override_font_sizes/font_size = 26
 text = "5"
 
 [node name="StartTimer" type="Timer" parent="."]
+wait_time = 3.0

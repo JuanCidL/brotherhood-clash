@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://2xvj3vuiusso"]
+
+[ext_resource type="Script" path="res://scenes/stages/base_stage.gd" id="1_ptxar"]
+[ext_resource type="PackedScene" uid="uid://cpq5mr5vnad37" path="res://scenes/stages/Basic_Map_1.tscn" id="2_ohw8t"]
+
+[node name="PlayableMap1" type="Node2D"]
+script = ExtResource("1_ptxar")
+
+[node name="Markers" type="Node2D" parent="."]
+
+[node name="P1" type="Marker2D" parent="Markers"]
+position = Vector2(128, 64)
+
+[node name="P2" type="Marker2D" parent="Markers"]
+position = Vector2(1280, 64)
+
+[node name="Players" type="Node2D" parent="."]
+
+[node name="BasicMap" parent="." instance=ExtResource("2_ohw8t")]
+position = Vector2(2, -65)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="CanvasLayer"]
+position = Vector2(704, 260)
+scale = Vector2(-204.103, 8.55589)
+zoom = Vector2(0.45, 0.45)

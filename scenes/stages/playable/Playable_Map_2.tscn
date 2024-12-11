@@ -1,10 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://2xvj3vuiusso"]
+[gd_scene load_steps=3 format=3 uid="uid://ditb75xpobblf"]
 
-[ext_resource type="Script" path="res://scenes/stages/test/test_with_map.gd" id="1_veel4"]
-[ext_resource type="PackedScene" uid="uid://cpq5mr5vnad37" path="res://scenes/stages/Basic_Map_1.tscn" id="2_00olc"]
+[ext_resource type="Script" path="res://scenes/stages/base_stage.gd" id="1_1k3jp"]
+[ext_resource type="PackedScene" uid="uid://baaope65honok" path="res://scenes/stages/Basic_Map_2.tscn" id="2_mkuys"]
 
-[node name="Test-with-map" type="Node2D"]
-script = ExtResource("1_veel4")
+[node name="PlayableMap2" type="Node2D"]
+script = ExtResource("1_1k3jp")
 
 [node name="Markers" type="Node2D" parent="."]
 
@@ -16,7 +16,7 @@ position = Vector2(1280, 64)
 
 [node name="Players" type="Node2D" parent="."]
 
-[node name="BasicMap" parent="." instance=ExtResource("2_00olc")]
+[node name="BasicMap2" parent="." instance=ExtResource("2_mkuys")]
 position = Vector2(2, -65)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

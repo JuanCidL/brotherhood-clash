@@ -1,12 +1,13 @@
 extends MarginContainer
 
 @export var lobby_player_scene: PackedScene
-@export var available_maps: Array = [1, 2] # IDs de los mapas
 
 # { id: true }
 var status = { 1 : false }
 var _menu_stack: Array[Control] = []
-var map_votes: Dictionary = {} # { player_id: map }
+var map_ids: Array = [1, 2, 3] # IDs de los mapas
+var available_maps: Array = ["Araña", "Ebria", "Cafeta"] # Nombres de los mapas
+var selected_map: int = -1
 
 @onready var user = %User
 @onready var host = %Host
@@ -16,8 +17,10 @@ var map_votes: Dictionary = {} # { player_id: map }
 @onready var confirm_join: Button = %ConfirmJoin
 @onready var role_a: Button = %RoleA
 @onready var role_b: Button = %RoleB
+@onready var map_R: Button = %MapR
 @onready var map_1: Button = %Map1
 @onready var map_2: Button = %Map2
+@onready var map_3: Button = %Map3
 @onready var back_ready: Button = %BackReady
 @onready var ready_toggle: Button = %Ready
 @onready var menus: MarginContainer = %Menus
@@ -28,7 +31,6 @@ var map_votes: Dictionary = {} # { player_id: map }
 @onready var start_timer: Timer = $StartTimer
 @onready var time_container: HBoxContainer = %TimeContainer
 @onready var time: Label = %Time
-
 
 func _ready():
 
@@ -53,8 +55,11 @@ func _ready():
 	role_a.pressed.connect(func(): Game.set_current_player_role(Statics.Role.ROLE_A))
 	role_b.pressed.connect(func(): Game.set_current_player_role(Statics.Role.ROLE_B))
 	
-	map_1.pressed.connect(func(): _on_map_selected(1))
-	map_2.pressed.connect(func(): _on_map_selected(2))
+	if multiplayer.is_server():
+		map_R.pressed.connect(func(): _on_map_selected(-1))
+		map_1.pressed.connect(func(): _on_map_selected(1))
+		map_2.pressed.connect(func(): _on_map_selected(2))
+		map_3.pressed.connect(func(): _on_map_selected(3))
 	
 	ready_toggle.pressed.connect(_on_ready_toggled)
 	
@@ -120,6 +125,10 @@ func _on_confirm_join_pressed() -> void:
 	_add_player(player)
 	
 	_go_to_menu(ready_menu)
+	map_R.disabled = true
+	map_1.disabled = true
+	map_2.disabled = true
+	map_3.disabled = true
 
 
 func _on_connected_to_server() -> void:
@@ -222,20 +231,25 @@ func set_player_ready(id: int, value: bool):
 func starting_game(value: bool):
 	role_a.disabled = value
 	role_b.disabled = value
+	if multiplayer.is_server():
+		map_R.disabled = value
+		map_1.disabled = value
+		map_2.disabled = value
+		map_3.disabled = value
 	back_ready.disabled = value
 	time_container.visible = value
 	if value:
-		start_timer.start()
+		if start_timer.is_stopped():
+			start_timer.start()
 	else:
 		start_timer.stop()
 
 
 @rpc("any_peer", "call_local", "reliable")
 func start_game() -> void:
-	var selected_map = _resolve_map()
 	Game.players.sort_custom(func(a, b): return a.index < b.index)
-	var scene_path = "res://scenes/stages/test/Test_Map_%d.tscn" % selected_map
-	Debug.log("Starting game with map %d" % selected_map)
+	var scene_path = "res://scenes/stages/playable/Playable_Map_%d.tscn" % selected_map
+	Debug.log("Starting game with map #%d: %d" % [selected_map, available_maps[selected_map - 1]])
 	get_tree().change_scene_to_file(scene_path)
 
 
@@ -245,7 +259,7 @@ func _check_ready() -> void:
 	for player in Game.players:
 		if not player.role in roles and player.role != Statics.Role.NONE:
 			roles.push_back(player.role)
-	ready_toggle.disabled = roles.size() != Statics.Role.size() - 1 and map_votes.size() == 2
+	ready_toggle.disabled = roles.size() != Statics.Role.size() - 1 or selected_map == -1
 
 
 func _disconnect():
@@ -294,23 +308,19 @@ func _back_to_first_menu() -> void:
 	if Game.is_online():
 		_disconnect()
 
+@rpc("any_peer", "call_local", "reliable")
+func update_map(map: int) -> void:
+	selected_map = map
+	Debug.log("Map updated to #%d: %s" % [map, available_maps[map - 1]])
+	_check_ready() 
+
 func _on_map_selected(map_id: int) -> void:
-	var player_id = multiplayer.get_unique_id()
-	map_votes[player_id] = map_id
-	Debug.log("Player %d voted for map %d" % [player_id, map_id])
-	_check_ready()
-	
-func _resolve_map() -> int:
-	if map_votes.size() == 2:
-		var votes = map_votes.values()
-		if votes[0] == votes[1]:
-			Debug.log("Both players voted for map %d" % votes[0])
-			return votes[0]
+	if multiplayer.is_server():
+		if map_id == -1:
+			selected_map = map_ids[randi() % available_maps.size()]
+			Debug.log("Randomly selected map #%d: %s" % [selected_map, available_maps[selected_map - 1]])
 		else:
-			var random_map = available_maps[randi() % available_maps.size()]
-			Debug.log("Vote tied, randomly selected map %d" % random_map)
-			return random_map
-	else:
-		var random_map = available_maps[randi() % available_maps.size()]
-		Debug.log("Not all players have voted. Rrandomly selected map %d" % random_map)
-		return random_map
+			selected_map = map_id
+			Debug.log("Host selected map #%d: %s" % [map_id, available_maps[map_id - 1]])
+		update_map.rpc(selected_map)
+		_check_ready()
