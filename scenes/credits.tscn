@@ -1,0 +1,152 @@
+[gd_scene load_steps=5 format=3 uid="uid://dv7tx53vamil2"]
+
+[ext_resource type="Script" path="res://scenes/credits.gd" id="1_fe4n2"]
+[ext_resource type="FontVariation" uid="uid://bt8ntslo7crfo" path="res://resources/mono.tres" id="2_oyyfj"]
+[ext_resource type="Texture2D" uid="uid://bmtrw5tj2t5x6" path="res://resources/citydark.png" id="3_7b785"]
+[ext_resource type="AudioStream" uid="uid://ccpirbdslgahd" path="res://resources/DEAF KEV - Invincible [NCS Release].mp3" id="3_8c8u6"]
+
+[node name="Credits" type="CanvasLayer"]
+script = ExtResource("1_fe4n2")
+
+[node name="Panel" type="Panel" parent="."]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0, 0, 0, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("2_oyyfj")
+theme_override_fonts/mono_font = ExtResource("2_oyyfj")
+theme_override_fonts/italics_font = ExtResource("2_oyyfj")
+theme_override_fonts/bold_italics_font = ExtResource("2_oyyfj")
+theme_override_fonts/bold_font = ExtResource("2_oyyfj")
+theme_override_font_sizes/bold_italics_font_size = 60
+theme_override_font_sizes/normal_font_size = 26
+theme_override_font_sizes/bold_font_size = 40
+bbcode_enabled = true
+text = "[center][color=#f5e042][outline_color=#1c3a73]
+
+
+
+
+
+
+
+[b][i] Credits:[/i][/b]
+
+
+
+
+
+
+
+
+[b] Developers:[/b]
+
+
+[url=https://juanin.itch.io/]Hwanin[/url]
+
+
+[url=https://karnow11.itch.io/]Karnow11[/url]
+
+
+[url=https://rocketjr.itch.io/]RocketJr[/url]
+
+
+[url=https://mariomatrix.itch.io/]Mariomatrix[/url]
+
+
+
+
+
+
+[b] Assets:[/b]
+
+
+[url=https://datagoblin.itch.io/]Datagoblin:[/url] [url=https://datagoblin.itch.io/monogram]monogram[/url]
+(elegant monospace pixel font)
+
+
+[url=https://mariaparragames.itch.io/]MariaParraGames:[/url] [url=https://mariaparragames.itch.io/free-retro-city-assetpack]Free Retro City asset pack[/url]
+(Map Assets and Sprites)
+
+
+[url=https://anokolisa.itch.io/]Anokolisa:[/url] [url=https://anokolisa.itch.io/sidescroller-pixelart-sprites-asset-pack-forest-16x16]Free - Pixel Art Asset Pack[/url]
+(Tree Assets)
+
+
+[url=https://free-game-assets.itch.io/]Craftpix:[/url] [url=https://free-game-assets.itch.io/free-city-backgrounds-pixel-art]Modern City Backgrounds Pixel Art[/url]
+(Backgrounds)
+
+
+[url=https://crusenho.itch.io/]Crusenho:[/url] [url=https://crusenho.itch.io/complete-ui-essential-pack]Complete UI Essential Pack[/url]
+(Interface Assets)
+
+
+[url=https://sungraphica.itch.io/]SunGraphica:[/url] [url=https://sungraphica.itch.io/gun-collection-game-asset]Gun collection game asset[/url]
+(Bomb Dinamite)
+
+
+[url=https://ansimuz.itch.io/]ansimuz:[/url] [url=https://ansimuz.itch.io/explosion-animations-pack]Explosion Animations Pack[/url]
+(Explosions)
+
+
+[url=https://alon1525.itch.io/]Alon1525:[/url] [url=https://alon1525.itch.io/coronavirus]CoronaVirus[/url]
+(Assets Virus Bomb)
+
+
+[url=https://govfx.itch.io/]GoVFX:[/url] [url=https://govfx.itch.io/realistic-smoke-fx-free-pack-v2]Realistic Smoke FX[/url]
+(Smoke Screen)
+
+
+[url=https://allnew.itch.io/]Allnew:[/url] [url=https://allnew.itch.io/flask-icons-32x32px]Flask Icons[/url]
+(Posion Flask)
+
+
+[url=https://vel-lori.itch.io/]Vel Lori:[/url] [url=https://vel-lori.itch.io/horror-laboratory-package]Horror science lab assets[/url]
+(Poison Drops)
+
+
+[url=https://frodoundead.itch.io/]FrodoUndead:[/url] [url=https://frodoundead.itch.io/skull-bones]Skull & Bones Sprites[/url]
+(Skulls)
+
+
+[url=https://www.youtube.com/@NoCopyrightSounds/]NCS:[/url] [url=https://ncs.io/invincible]DEAF KEV - Invincible[/url]
+(Credits Song)
+
+[/outline_color][/color][/center]"
+scroll_active = false
+
+[node name="Button" type="Button" parent="."]
+offset_left = 27.0
+offset_top = 308.0
+offset_right = 72.0
+offset_bottom = 332.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Back"
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(316.5, 600.822)
+scale = Vector2(1.19618, 3.75418)
+texture = ExtResource("3_7b785")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_8c8u6")
+volume_db = -20.0
+pitch_scale = 1.5
+autoplay = true
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

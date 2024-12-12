@@ -1,6 +1,40 @@
-[gd_resource type="Theme" load_steps=5 format=3 uid="uid://bwgdrcgopd0s1"]
+[gd_resource type="Theme" load_steps=12 format=3 uid="uid://bwgdrcgopd0s1"]
 
 [ext_resource type="Texture2D" uid="uid://be1xw1faitmip" path="res://resources/UI_Flat_Frame02a.png" id="1_4r4l7"]
+[ext_resource type="FontVariation" uid="uid://bt8ntslo7crfo" path="res://resources/mono.tres" id="2_epal4"]
+[ext_resource type="Texture2D" uid="uid://b162mn4q1h3i3" path="res://resources/UI_Flat_Bar10a.png" id="2_jjy28"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_a8pmo"]
+texture = ExtResource("2_jjy28")
+expand_margin_left = 10.0
+expand_margin_top = 2.0
+expand_margin_right = 10.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mc3cw"]
+texture = ExtResource("2_jjy28")
+expand_margin_left = 10.0
+expand_margin_top = 2.0
+expand_margin_right = 10.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_syy2s"]
+texture = ExtResource("2_jjy28")
+expand_margin_left = 10.0
+expand_margin_top = 2.0
+expand_margin_right = 10.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5vxjm"]
+texture = ExtResource("2_jjy28")
+expand_margin_left = 10.0
+expand_margin_top = 2.0
+expand_margin_right = 10.0
+expand_margin_bottom = 2.0
+modulate_color = Color(0.699653, 0.699653, 0.699653, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_44v5a"]
+texture = ExtResource("2_jjy28")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_suswy"]
 bg_color = Color(0.466181, 0.466181, 0.466181, 1)
@@ -20,6 +54,31 @@ corner_radius_bottom_left = 15
 texture = ExtResource("1_4r4l7")
 
 [resource]
+default_font = ExtResource("2_epal4")
+Button/colors/font_color = Color(0, 0, 0, 1)
+Button/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
+Button/colors/font_focus_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(0, 0, 0, 1)
+Button/colors/icon_disabled_color = Color(1, 1, 1, 0.4)
+Button/colors/icon_focus_color = Color(1, 1, 1, 1)
+Button/colors/icon_hover_color = Color(1, 1, 1, 1)
+Button/colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/icon_normal_color = Color(1, 1, 1, 1)
+Button/colors/icon_pressed_color = Color(1, 1, 1, 1)
+Button/constants/align_to_largest_stylebox = 0
+Button/constants/h_separation = 4
+Button/constants/icon_max_width = 0
+Button/constants/outline_size = 0
+Button/font_sizes/font_size = 30
+Button/fonts/font = ExtResource("2_epal4")
+Button/styles/disabled = SubResource("StyleBoxTexture_a8pmo")
+Button/styles/focus = SubResource("StyleBoxTexture_mc3cw")
+Button/styles/hover = SubResource("StyleBoxTexture_syy2s")
+Button/styles/normal = SubResource("StyleBoxTexture_5vxjm")
+Button/styles/pressed = SubResource("StyleBoxTexture_44v5a")
 HealthBar/base_type = &"ProgressBar"
 HealthBar/constants/outline_size = 2
 HealthBar/font_sizes/font_size = 20

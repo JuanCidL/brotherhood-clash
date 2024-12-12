@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="multiplayer_example"
-run/main_scene="res://scenes/lobby.tscn"
+run/main_scene="res://scenes/menu_principal.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -27,7 +27,6 @@ window/size/viewport_height=360
 window/size/window_width_override=1024
 window/size/window_height_override=640
 window/stretch/mode="viewport"
-mouse_cursor/custom_image="res://assets/fx/pointer_cursor.png"
 mouse_cursor/custom_image_hotspot=Vector2(16, 16)
 
 [gui]

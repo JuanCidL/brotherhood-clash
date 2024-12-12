@@ -1,0 +1,84 @@
+[gd_scene load_steps=6 format=3 uid="uid://dt0wl33jcn756"]
+
+[ext_resource type="Script" path="res://scenes/menu_principal.gd" id="1_bc7ol"]
+[ext_resource type="Texture2D" uid="uid://c5pmrnhfhgi20" path="res://resources/UI_Flat_Banner01a.png" id="2_bwq6i"]
+[ext_resource type="FontVariation" uid="uid://bt8ntslo7crfo" path="res://resources/mono.tres" id="2_r0fmo"]
+[ext_resource type="Texture2D" uid="uid://bmtrw5tj2t5x6" path="res://resources/citydark.png" id="4_ckcmr"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vx5jy"]
+texture = ExtResource("2_bwq6i")
+expand_margin_left = 80.0
+expand_margin_top = 15.0
+expand_margin_right = 80.0
+expand_margin_bottom = 10.0
+
+[node name="MenuPrincipalConCreditos" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bc7ol")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(322, 176)
+scale = Vector2(1.205, 1.205)
+texture = ExtResource("4_ckcmr")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -159.5
+offset_top = 50.0
+offset_right = 159.5
+offset_bottom = 91.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxTexture_vx5jy")
+text = "Brotherhood Clash"
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -23.0
+offset_right = 100.0
+offset_bottom = 127.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 8
+
+[node name="StartB" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_r0fmo")
+theme_override_font_sizes/font_size = 28
+text = "Start"
+
+[node name="CreditosB" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_r0fmo")
+theme_override_font_sizes/font_size = 28
+text = "Credits"
+
+[node name="QuitB" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_r0fmo")
+theme_override_font_sizes/font_size = 28
+text = "Quit"
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/StartB" to="." method="_on_start_b_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/CreditosB" to="." method="_on_creditos_b_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/QuitB" to="." method="_on_quit_b_pressed"]
