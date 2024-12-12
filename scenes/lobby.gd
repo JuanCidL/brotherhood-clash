@@ -36,7 +36,6 @@ func _ready():
 	#if Game.multiplayer_test:
 	#	get_tree().change_scene_to_file.call_deferred("res://scenes/lobby_test.tscn")
 	#	return
-
 	
 	multiplayer.connected_to_server.connect(_on_connected_to_server)
 	multiplayer.connection_failed.connect(_on_connection_failed)
