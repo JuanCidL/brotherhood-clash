@@ -24,4 +24,4 @@ position = Vector2(2, -65)
 [node name="Camera2D" type="Camera2D" parent="CanvasLayer"]
 position = Vector2(704, 260)
 scale = Vector2(-204.103, 8.55589)
-zoom = Vector2(0.45, 0.45)
+zoom = Vector2(0.6, 0.6)

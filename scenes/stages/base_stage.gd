@@ -43,13 +43,12 @@ enum GameState{
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	timer_init = get_tree().create_timer(5)
+	_placeholder_setup()
 	teams_quantity = Game.players.size()
 	for i in Game.players.size():
 		players_data.append(Game.players[i])
 		var player = Game.players[i]
 		var id = player.id
-		var role = player.role
-		_placeholder_setup(player.role)
 		characters[id] = []
 		Game.players_health[id] = Game.MINION_MAX_HEALTH * (minions_quantity+1)
 	player_id = Game.get_current_player().id
@@ -106,7 +105,7 @@ func _setup_ui():
 	canvas.add_child(player_ui, true)
 
 # function to setup the placeholder spawn indicator
-func _placeholder_setup(role: Statics.Role):
+func _placeholder_setup():
 	sprite_placeholder = Sprite2D.new()
 	add_child(sprite_placeholder, true)
 	sprite_placeholder.texture = PLACEHOLDER_SPRITE

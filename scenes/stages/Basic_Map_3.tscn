@@ -7,7 +7,7 @@
 
 [node name="BasicMap3" type="Node2D"]
 
-[node name="Ebria" parent="." instance=ExtResource("1_lv43f")]
+[node name="GenFloor1" parent="." instance=ExtResource("1_lv43f")]
 position = Vector2(-165, 316)
 scale = Vector2(6, 6)
 
@@ -44,3 +44,7 @@ show_behind_parent = true
 position = Vector2(697.5, 311.5)
 scale = Vector2(4.78438, 5.06771)
 texture = ExtResource("4_8ads1")
+
+[node name="GenFloor" parent="." instance=ExtResource("1_lv43f")]
+position = Vector2(-165, 412)
+scale = Vector2(6, 6)
