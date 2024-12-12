@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://scenes/credits.gd" id="1_fe4n2"]
 [ext_resource type="FontVariation" uid="uid://bt8ntslo7crfo" path="res://resources/mono.tres" id="2_oyyfj"]
-[ext_resource type="Texture2D" uid="uid://bmtrw5tj2t5x6" path="res://resources/citydark.png" id="3_7b785"]
 [ext_resource type="AudioStream" uid="uid://ccpirbdslgahd" path="res://resources/DEAF KEV - Invincible [NCS Release].mp3" id="3_8c8u6"]
+[ext_resource type="Texture2D" uid="uid://didp5s86drghl" path="res://resources/citylarge.png" id="3_nxprs"]
 
 [node name="Credits" type="CanvasLayer"]
 script = ExtResource("1_fe4n2")
@@ -28,9 +28,9 @@ theme_override_fonts/mono_font = ExtResource("2_oyyfj")
 theme_override_fonts/italics_font = ExtResource("2_oyyfj")
 theme_override_fonts/bold_italics_font = ExtResource("2_oyyfj")
 theme_override_fonts/bold_font = ExtResource("2_oyyfj")
-theme_override_font_sizes/bold_italics_font_size = 60
-theme_override_font_sizes/normal_font_size = 26
-theme_override_font_sizes/bold_font_size = 40
+theme_override_font_sizes/bold_italics_font_size = 150
+theme_override_font_sizes/normal_font_size = 40
+theme_override_font_sizes/bold_font_size = 80
 bbcode_enabled = true
 text = "[center][color=#f5e042][outline_color=#1c3a73]
 
@@ -126,10 +126,14 @@ text = "[center][color=#f5e042][outline_color=#1c3a73]
 scroll_active = false
 
 [node name="Button" type="Button" parent="."]
-offset_left = 27.0
-offset_top = 308.0
-offset_right = 72.0
-offset_bottom = 332.0
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 26.0
+offset_top = -65.0
+offset_right = 116.0
+offset_bottom = -17.0
+grow_vertical = 0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "Back"
@@ -139,9 +143,9 @@ text = "Back"
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-position = Vector2(316.5, 600.822)
-scale = Vector2(1.19618, 3.75418)
-texture = ExtResource("3_7b785")
+position = Vector2(636.5, 934.646)
+scale = Vector2(0.582031, 1.47894)
+texture = ExtResource("3_nxprs")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_8c8u6")
