@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://da7nm2vrm1lce"]
+
+[ext_resource type="Script" path="res://scenes/weapons/poison_flask_weapon.gd" id="1_82sp8"]
+[ext_resource type="Texture2D" uid="uid://e3jomny3xuso" path="res://resources/weapons/Flasks 32x32.png" id="2_4qo72"]
+[ext_resource type="Texture2D" uid="uid://blcs2bl64o8qi" path="res://resources/weapons/skull.png" id="3_o2x1a"]
+[ext_resource type="PackedScene" uid="uid://bvyl75y3qnq35" path="res://scenes/utils/drag_area.tscn" id="3_ynahp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kq7rl"]
+size = Vector2(28, 38)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gfsy4"]
+size = Vector2(15.7895, 21.0526)
+
+[node name="PoisonFlaskWeapon" type="RigidBody2D"]
+collision_layer = 4
+collision_mask = 3
+freeze = true
+script = ExtResource("1_82sp8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.3, 1.3)
+texture = ExtResource("2_4qo72")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D"]
+modulate = Color(0.215686, 1, 0, 1)
+position = Vector2(0, 3.565)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("3_o2x1a")
+
+[node name="DragArea" parent="." node_paths=PackedStringArray("body") instance=ExtResource("3_ynahp")]
+body = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_kq7rl")
+
+[node name="HurtArea" type="Area2D" parent="."]
+visible = false
+collision_layer = 4
+collision_mask = 2
+
+[node name="HurtBox" type="CollisionShape2D" parent="HurtArea"]
+position = Vector2(0, -1)
+scale = Vector2(1.9, 1.9)
+shape = SubResource("RectangleShape2D_gfsy4")
