@@ -20,4 +20,4 @@ func weapon_effect(power: float) -> void:
 		queue_free()
 # Recuperar animation player en el codigo
 # Hacer un timer await get_tree().create_timer(5).timeout
-	nodo_AnimationPlayer.play("explosion")
+	#nodo_AnimationPlayer.play("explosion")

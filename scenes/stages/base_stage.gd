@@ -201,7 +201,8 @@ func _on_weapon_action(character: BaseCharacter, weapon: BaseWeapon) -> void:
 	# Wait until time ends and then change turn
 	player_ui.set_weapon_action_time.rpc(weapon.action_time)
 	await get_tree().create_timer(weapon.action_time).timeout
-	_handle_character_turn.rpc(character.id)
+	if is_instance_valid(character):
+		_handle_character_turn.rpc(character.id)
 
 
 func _set_game_state(st: GameState):

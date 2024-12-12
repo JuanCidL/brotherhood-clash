@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/lobby.gd" id="1_g2fmt"]
 [ext_resource type="PackedScene" uid="uid://chbh4lxk8rmmd" path="res://scenes/ui/lobby_player.tscn" id="2_060bj"]
-[ext_resource type="FontVariation" path="res://resources/mono.tres" id="3_c3sgj"]
+[ext_resource type="FontVariation" uid="uid://bt8ntslo7crfo" path="res://resources/mono.tres" id="3_c3sgj"]
 
 [node name="Lobby" type="MarginContainer"]
 anchors_preset = 15
@@ -27,38 +27,34 @@ unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
+theme_override_constants/separation = 20
 
 [node name="Label" type="Label" parent="PanelContainer/Menus/StartMenu"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_c3sgj")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 70
 text = "Name:
 "
 
 [node name="User" type="LineEdit" parent="PanelContainer/Menus/StartMenu"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_c3sgj")
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 40
 text = "Player"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/Menus/StartMenu"]
 layout_mode = 2
+theme_override_constants/separation = 30
 
 [node name="Host" type="Button" parent="PanelContainer/Menus/StartMenu/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("3_c3sgj")
-theme_override_font_sizes/font_size = 28
 text = "Host"
 
 [node name="Join" type="Button" parent="PanelContainer/Menus/StartMenu/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("3_c3sgj")
-theme_override_font_sizes/font_size = 28
 text = "Join"
 
 [node name="JoinMenu" type="VBoxContainer" parent="PanelContainer/Menus"]
@@ -66,38 +62,34 @@ unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
+theme_override_constants/separation = 20
 
 [node name="Label2" type="Label" parent="PanelContainer/Menus/JoinMenu"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_c3sgj")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 70
 text = "IP:
 "
 
 [node name="IP" type="LineEdit" parent="PanelContainer/Menus/JoinMenu"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_c3sgj")
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 40
 text = "127.0.0.1"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/Menus/JoinMenu"]
 layout_mode = 2
+theme_override_constants/separation = 30
 
 [node name="BackJoin" type="Button" parent="PanelContainer/Menus/JoinMenu/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("3_c3sgj")
-theme_override_font_sizes/font_size = 28
 text = "Back"
 
 [node name="ConfirmJoin" type="Button" parent="PanelContainer/Menus/JoinMenu/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("3_c3sgj")
-theme_override_font_sizes/font_size = 28
 text = "Join"
 
 [node name="Info" type="Label" parent="PanelContainer/Menus/JoinMenu"]
@@ -106,13 +98,15 @@ layout_mode = 2
 
 [node name="ReadyMenu" type="VBoxContainer" parent="PanelContainer/Menus"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
+theme_override_constants/separation = 20
 
 [node name="Label" type="Label" parent="PanelContainer/Menus/ReadyMenu"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_c3sgj")
-theme_override_font_sizes/font_size = 26
+theme_override_font_sizes/font_size = 100
 text = "Players:
 "
 
@@ -125,13 +119,13 @@ layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/Menus/ReadyMenu"]
 layout_mode = 2
+theme_override_constants/separation = 30
 
 [node name="RoleA" type="Button" parent="PanelContainer/Menus/ReadyMenu/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("3_c3sgj")
-theme_override_font_sizes/font_size = 26
 text = "Role A"
 
 [node name="RoleB" type="Button" parent="PanelContainer/Menus/ReadyMenu/HBoxContainer"]
@@ -139,11 +133,11 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("3_c3sgj")
-theme_override_font_sizes/font_size = 26
 text = "Role B"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/Menus/ReadyMenu"]
 layout_mode = 2
+theme_override_constants/separation = 30
 
 [node name="MapR" type="Button" parent="PanelContainer/Menus/ReadyMenu/HBoxContainer2"]
 unique_name_in_owner = true
@@ -173,13 +167,13 @@ text = "Cafeta"
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="PanelContainer/Menus/ReadyMenu"]
 layout_mode = 2
+theme_override_constants/separation = 30
 
 [node name="BackReady" type="Button" parent="PanelContainer/Menus/ReadyMenu/HBoxContainer3"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("3_c3sgj")
-theme_override_font_sizes/font_size = 26
+theme_override_font_sizes/font_size = 100
 text = "Back
 "
 
@@ -187,8 +181,7 @@ text = "Back
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_fonts/font = ExtResource("3_c3sgj")
-theme_override_font_sizes/font_size = 26
+theme_override_font_sizes/font_size = 100
 text = "Ready"
 
 [node name="TimeContainer" type="HBoxContainer" parent="PanelContainer/Menus/ReadyMenu"]
@@ -198,15 +191,13 @@ alignment = 1
 
 [node name="Label2" type="Label" parent="PanelContainer/Menus/ReadyMenu/TimeContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_c3sgj")
-theme_override_font_sizes/font_size = 26
+theme_override_font_sizes/font_size = 50
 text = "Starting in:"
 
 [node name="Time" type="Label" parent="PanelContainer/Menus/ReadyMenu/TimeContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_c3sgj")
-theme_override_font_sizes/font_size = 26
+theme_override_font_sizes/font_size = 50
 text = "5"
 
 [node name="StartTimer" type="Timer" parent="."]
