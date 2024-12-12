@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://vh0b2gynnv58"]
+
+[ext_resource type="Texture2D" uid="uid://tw8t38ns0seh" path="res://icon.svg" id="1_3etwq"]
+[ext_resource type="Script" path="res://scenes/ui/item_frame.gd" id="2_aqoo3"]
+
+[node name="ItemFrame" type="Button"]
+clip_contents = true
+custom_minimum_size = Vector2(128, 128)
+offset_right = 128.0
+offset_bottom = 128.0
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_type_variation = &"SelectButton"
+icon = ExtResource("1_3etwq")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("2_aqoo3")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+offset_right = 128.0
+offset_bottom = 128.0
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="Name" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_type_variation = &"ItemLabel"
+text = "Name"
+
+[node name="Quantity" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_type_variation = &"ItemLabel"
+text = "0
+"
