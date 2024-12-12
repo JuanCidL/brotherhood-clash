@@ -50,8 +50,85 @@ corner_radius_top_right = 15
 corner_radius_bottom_right = 15
 corner_radius_bottom_left = 15
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4sh3m"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ls83i"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
 texture = ExtResource("1_4r4l7")
+region_rect = Rect2(0, 0, 96, 64)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5fwa2"]
+bg_color = Color(0.54814, 0.648472, 0.951631, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7nhfc"]
+bg_color = Color(0.191481, 0.274422, 0.656888, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4sh3m"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+texture = ExtResource("1_4r4l7")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vw422"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nskn5"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(1, 0.93388, 0.461515, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v2856"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.7, 0.63, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nt2ef"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+bg_color = Color(0.435959, 0.39044, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [resource]
 default_font = ExtResource("2_epal4")
@@ -81,9 +158,22 @@ Button/styles/normal = SubResource("StyleBoxTexture_5vxjm")
 Button/styles/pressed = SubResource("StyleBoxTexture_44v5a")
 HealthBar/base_type = &"ProgressBar"
 HealthBar/constants/outline_size = 2
-HealthBar/font_sizes/font_size = 20
+HealthBar/font_sizes/font_size = 34
 HealthBar/styles/background = SubResource("StyleBoxFlat_suswy")
 HealthBar/styles/fill = SubResource("StyleBoxFlat_lkbfl")
+ItemLabel/base_type = &"Label"
+ItemLabel/colors/font_color = Color(0.75, 0.75, 0.09, 1)
+ItemLabel/constants/outline_size = 4
+ItemLabel/font_sizes/font_size = 32
+ItemList/styles/focus = SubResource("StyleBoxTexture_ls83i")
+ItemList/styles/hovered = SubResource("StyleBoxFlat_5fwa2")
+ItemList/styles/panel = SubResource("StyleBoxTexture_ls83i")
+ItemList/styles/selected = SubResource("StyleBoxFlat_7nhfc")
+ItemList/styles/selected_focus = SubResource("StyleBoxFlat_7nhfc")
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/constants/outline_size = 6
+Label/font_sizes/font_size = 64
+Label/fonts/font = ExtResource("2_ntwbm")
 MarginContainer/constants/margin_bottom = 20
 MarginContainer/constants/margin_left = 20
 MarginContainer/constants/margin_right = 20
@@ -94,4 +184,9 @@ MarginContainerSmall/constants/margin_left = 10
 MarginContainerSmall/constants/margin_right = 10
 MarginContainerSmall/constants/margin_top = 10
 PanelContainer/styles/panel = SubResource("StyleBoxTexture_4sh3m")
+SelectButton/base_type = &"Button"
+SelectButton/styles/focus = SubResource("StyleBoxEmpty_vw422")
+SelectButton/styles/hover = SubResource("StyleBoxFlat_nskn5")
+SelectButton/styles/normal = SubResource("StyleBoxFlat_v2856")
+SelectButton/styles/pressed = SubResource("StyleBoxFlat_nt2ef")
 VBoxContainer/constants/separation = 4
