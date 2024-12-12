@@ -24,6 +24,9 @@ signal die_signal(character: BaseCharacter)
 # Debug
 @onready var weapon_scene = preload("res://scenes/weapons/weapon_damage.tscn")
 @onready var dron_scene = preload("res://scenes/weapons/dron_weapon.tscn")
+@onready var dinamite_scene = preload("res://scenes/weapons/dinamite_weapon.tscn")
+@onready var poison_flask_scene = preload("res://scenes/weapons/poison_flask_weapon.tscn")
+@onready var virus_bomb_scene = preload("res://scenes/weapons/virus_bomb_weapon.tscn")
 @onready var weapon_instance: BaseWeapon = null
 
 # Weapon spawning
@@ -120,7 +123,10 @@ func take_damage(value: int):
 		return
 	set_collision_mask_value(3, false)
 	await get_tree().create_timer(2).timeout
-	set_collision_mask_value(3, true)
+	set_collision_mask_value(3, true)	
+#func push(direction: Vector2, impulse: float) -> void:
+#	velocity += direction * impulse
+
 
 func change_state(state: PlayerState) -> void:
 	player_state = state

@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=3 uid="uid://c15bruo3rx3br"]
+
+[ext_resource type="Texture2D" uid="uid://blcs2bl64o8qi" path="res://resources/weapons/skull.png" id="1_5vf4d"]
+[ext_resource type="Texture2D" uid="uid://cckdhan6ymjyu" path="res://resources/weapons/Smoke_4_512-sheet.png" id="2_7bj5r"]
+[ext_resource type="Texture2D" uid="uid://3hotm21un44q" path="res://resources/weapons/mancha1.png" id="3_e4stc"]
+[ext_resource type="Texture2D" uid="uid://cca6a6wfvrsfb" path="res://resources/weapons/mancha2.png" id="4_4rfvj"]
+
+[node name="PoisonScene" type="Node2D"]
+
+[node name="calaberas" type="Sprite2D" parent="."]
+modulate = Color(0.0886725, 0.776664, 0, 1)
+top_level = true
+
+[node name="calaberas" type="Sprite2D" parent="calaberas"]
+position = Vector2(0, -45)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_5vf4d")
+
+[node name="calaberas2" type="Sprite2D" parent="calaberas"]
+position = Vector2(25, -20)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_5vf4d")
+
+[node name="calaberas3" type="Sprite2D" parent="calaberas"]
+position = Vector2(-25, -25)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_5vf4d")
+
+[node name="vapor" type="Sprite2D" parent="."]
+modulate = Color(0.529412, 1, 0.223529, 0.282353)
+light_mask = 0
+position = Vector2(-5.075, -40)
+scale = Vector2(0.7, 0.475)
+texture = ExtResource("2_7bj5r")
+
+[node name="PadreSprite" type="Sprite2D" parent="."]
+modulate = Color(0.584314, 1, 0.0784314, 1)
+
+[node name="posa" type="Sprite2D" parent="PadreSprite"]
+modulate = Color(0.603923, 0.603923, 0.603923, 1)
+position = Vector2(0, 10)
+scale = Vector2(3, 1)
+texture = ExtResource("3_e4stc")
+
+[node name="gota1" type="Sprite2D" parent="PadreSprite/posa"]
+position = Vector2(-9, 22)
+rotation = 1.5708
+scale = Vector2(1, 0.914)
+texture = ExtResource("4_4rfvj")
+
+[node name="gota2" type="Sprite2D" parent="PadreSprite/posa"]
+position = Vector2(8, 18)
+rotation = 1.5708
+scale = Vector2(1, 0.914)
+texture = ExtResource("4_4rfvj")
