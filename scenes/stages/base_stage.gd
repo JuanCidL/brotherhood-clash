@@ -76,7 +76,7 @@ func _process(delta: float) -> void:
 				var character: BaseCharacter = characters[player_id].front()
 				if not character.is_enabled and character.player_state == BaseCharacter.PlayerState.IDLE:
 					character.enable.rpc()
-					player_ui.set_hint_text(str(players_data[character.id].role) + ' turn')
+					player_ui.set_hint_text(str(players_data.front().role) + ' turn')
 					
 
 # call the only the random value of host 
