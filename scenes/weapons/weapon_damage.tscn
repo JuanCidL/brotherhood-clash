@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://blfrqjts3l8ot"]
 
 [ext_resource type="Script" path="res://scenes/weapons/weapon_damage.gd" id="1_r22pb"]
-[ext_resource type="Texture2D" uid="uid://tw8t38ns0seh" path="res://icon.svg" id="2_yeglh"]
+[ext_resource type="Texture2D" uid="uid://p48dbopcbrjd" path="res://resources/weapons/Coffee Mug 001 16x161.png" id="2_mh5xk"]
 [ext_resource type="PackedScene" uid="uid://bvyl75y3qnq35" path="res://scenes/utils/drag_area.tscn" id="3_j8tdk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gxfh3"]
@@ -16,8 +16,9 @@ freeze = true
 script = ExtResource("1_r22pb")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.094, 0.094)
-texture = ExtResource("2_yeglh")
+position = Vector2(0.935, -0.59)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("2_mh5xk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_gxfh3")

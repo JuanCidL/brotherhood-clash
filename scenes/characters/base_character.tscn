@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/characters/base_character.gd" id="1_ic8vr"]
 [ext_resource type="Texture2D" uid="uid://dwco3d6wfwti1" path="res://resources/pj_sinfondo.png" id="2_yhsxp"]
 [ext_resource type="PackedScene" uid="uid://bvyl75y3qnq35" path="res://scenes/utils/drag_area.tscn" id="3_oixy1"]
-[ext_resource type="PackedScene" path="res://scenes/ui/health_bar.tscn" id="4_tsjhi"]
+[ext_resource type="PackedScene" uid="uid://dowscpiyes2bq" path="res://scenes/ui/health_bar.tscn" id="4_tsjhi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tjwvx"]
 size = Vector2(216, 300)

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/ui/player_ui.gd" id="1_oe7fk"]
 [ext_resource type="PackedScene" uid="uid://cc60abixblx4k" path="res://scenes/ui/character_inventory.tscn" id="2_wvtpv"]
-[ext_resource type="Texture2D" uid="uid://tw8t38ns0seh" path="res://icon.svg" id="3_tu8pf"]
+[ext_resource type="Texture2D" uid="uid://cx3pxlg8tmjwm" path="res://resources/Briefcase.png" id="3_6me1p"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ygywu"]
 bg_color = Color(0, 0, 0, 1)
@@ -93,7 +93,7 @@ size_flags_horizontal = 8
 size_flags_vertical = 8
 theme_type_variation = &"SelectButton"
 disabled = true
-icon = ExtResource("3_tu8pf")
+icon = ExtResource("3_6me1p")
 expand_icon = true
 
 [node name="GameHint" type="Label" parent="."]

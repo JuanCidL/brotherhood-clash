@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://cc60abixblx4k"]
+[gd_scene load_steps=7 format=3 uid="uid://cc60abixblx4k"]
 
 [ext_resource type="Script" path="res://scenes/ui/character_inventory.gd" id="1_ysyb8"]
 [ext_resource type="Texture2D" uid="uid://b1wdpjaufy61e" path="res://assets/fx/hand_close_pointer.png" id="2_c5li0"]
 [ext_resource type="PackedScene" uid="uid://vh0b2gynnv58" path="res://scenes/ui/item_frame.tscn" id="2_pp6hs"]
 [ext_resource type="Texture2D" uid="uid://tw8t38ns0seh" path="res://icon.svg" id="3_5oq40"]
+[ext_resource type="Texture2D" uid="uid://p48dbopcbrjd" path="res://resources/weapons/Coffee Mug 001 16x161.png" id="5_h3bd0"]
+[ext_resource type="Texture2D" uid="uid://cfps2mtkufr3u" path="res://resources/weapons/dron.png" id="6_itasa"]
 
 [node name="CharacterInventory" type="Control"]
 layout_mode = 3
@@ -65,8 +67,10 @@ columns = 4
 
 [node name="ItemFrame" parent="SelectContainer/Inventory/InventoryGrid/ItemContainer" instance=ExtResource("2_pp6hs")]
 layout_mode = 2
+icon = ExtResource("5_h3bd0")
 text_name = "Damage"
 
 [node name="ItemFrame2" parent="SelectContainer/Inventory/InventoryGrid/ItemContainer" instance=ExtResource("2_pp6hs")]
 layout_mode = 2
+icon = ExtResource("6_itasa")
 text_name = "Dron"

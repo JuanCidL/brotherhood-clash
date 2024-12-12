@@ -2,7 +2,7 @@ class_name BaseStage
 extends Node2D
 
 const PLAYER_UI = preload("res://scenes/ui/player_ui.tscn")
-const PLACEHOLDER_SPRITE = preload("res://resources/pj_sinfondo.png")
+const PLACEHOLDER_SPRITE = preload("res://resources/character_sprite/ghost.png")
 const SPRITE_A = preload("res://resources/character_sprite/inge-dcc.png")
 const SPRITE_B = preload("res://resources/character_sprite/inge-quim.png")
 const SPRITE_C = preload("res://resources/character_sprite/inge-bio.png")
