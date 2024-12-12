@@ -1,0 +1,79 @@
+[gd_scene load_steps=5 format=3 uid="uid://dd2fn5ctv20fe"]
+
+[ext_resource type="Texture2D" uid="uid://6wuw0vq37nhv" path="res://resources/weapons/Smoke_3_512-sheet.png" id="1_uqept"]
+[ext_resource type="Texture2D" uid="uid://cckdhan6ymjyu" path="res://resources/weapons/Smoke_4_512-sheet.png" id="2_1e5dq"]
+[ext_resource type="Texture2D" uid="uid://c7bq5c7cbthoa" path="res://resources/weapons/Angryvirus6.png" id="3_v0rpa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0jtb0"]
+size = Vector2(375, 163)
+
+[node name="SmokeScene" type="Node2D"]
+modulate = Color(1, 0.258824, 0, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.690196)
+position = Vector2(0, -10)
+rotation = 3.14159
+texture = ExtResource("1_uqept")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.505882)
+position = Vector2(-100, -10)
+texture = ExtResource("2_1e5dq")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.486275)
+position = Vector2(100, -10)
+texture = ExtResource("2_1e5dq")
+
+[node name="Espora" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.333333)
+position = Vector2(-153, 9)
+rotation = -0.829031
+scale = Vector2(0.04, 0.04)
+texture = ExtResource("3_v0rpa")
+
+[node name="Espora5" type="Sprite2D" parent="Espora"]
+position = Vector2(1810.58, 273.691)
+rotation = 0.305433
+texture = ExtResource("3_v0rpa")
+
+[node name="Espora2" type="Sprite2D" parent="Espora"]
+texture = ExtResource("3_v0rpa")
+
+[node name="Espora3" type="Sprite2D" parent="Espora"]
+position = Vector2(4038.71, 1521.12)
+rotation = 1.309
+texture = ExtResource("3_v0rpa")
+
+[node name="Espora4" type="Sprite2D" parent="Espora"]
+position = Vector2(1039.31, 2133.33)
+rotation = 0.785398
+texture = ExtResource("3_v0rpa")
+
+[node name="Espora6" type="Sprite2D" parent="Espora"]
+position = Vector2(5220.77, 4032.26)
+rotation = 1.39626
+texture = ExtResource("3_v0rpa")
+
+[node name="Espora7" type="Sprite2D" parent="Espora"]
+position = Vector2(4646.08, 5847.4)
+rotation = 1.39626
+texture = ExtResource("3_v0rpa")
+
+[node name="Espora8" type="Sprite2D" parent="Espora"]
+position = Vector2(3192.02, 4297.58)
+rotation = 1.5708
+texture = ExtResource("3_v0rpa")
+
+[node name="Espora9" type="Sprite2D" parent="Espora"]
+position = Vector2(2868.25, 2797.1)
+rotation = 0.785398
+texture = ExtResource("3_v0rpa")
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.5, -16.5)
+shape = SubResource("RectangleShape2D_0jtb0")

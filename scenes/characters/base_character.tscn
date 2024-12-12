@@ -23,6 +23,7 @@ texture = ExtResource("2_yhsxp")
 
 [node name="TurnMark" type="Line2D" parent="Pivot"]
 visible = false
+z_index = 5
 points = PackedVector2Array(-16, -80, 0, -64, 16, -80)
 closed = true
 width = 2.0
@@ -47,7 +48,7 @@ offset_bottom = -50.0
 show_percentage = false
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://scenes/weapons/base_weapon.tscn", "res://scenes/weapons/weapon_damage.tscn", "res://scenes/weapons/dron_weapon.tscn")
+_spawnable_scenes = PackedStringArray("res://scenes/weapons/base_weapon.tscn", "res://scenes/weapons/weapon_damage.tscn", "res://scenes/weapons/dron_weapon.tscn", "res://scenes/weapons/dinamite_weapon.tscn", "res://scenes/weapons/poison_flask_weapon.tscn", "res://scenes/weapons/virus_bomb_weapon.tscn")
 spawn_path = NodePath("../Node")
 
 [node name="Node" type="Node" parent="."]
