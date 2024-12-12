@@ -73,11 +73,15 @@ func _process(delta: float) -> void:
 				pass
 		GameState.PLAYING:
 			if player_id == players_data.front().id:
+				if characters[player_id].is_empty():
+					game_state = GameState.END
+					return
 				var character: BaseCharacter = characters[player_id].front()
 				if not character.is_enabled and character.player_state == BaseCharacter.PlayerState.IDLE:
 					character.enable.rpc()
-					player_ui.set_hint_text(str(players_data[character.id].role) + ' turn')
-					
+					player_ui.set_hint_text(str(players_data.front().role) + ' turn')
+		GameState.END:
+			pass
 
 # call the only the random value of host 
 @rpc('call_local', 'any_peer', 'reliable')
@@ -124,6 +128,8 @@ func _handle_place(mouse_pos: Vector2, pid: int):
 				hide_inventory_button()
 		)
 		player_ui.weapon_selected.connect(func(weapon: PackedScene) -> void:
+			if not instance:
+				return
 			if not instance.is_enabled:
 				return
 			instance.disable.rpc()
@@ -154,6 +160,9 @@ func _handle_place(mouse_pos: Vector2, pid: int):
 func _handle_character_turn(pid: int):
 	# Disable the current character
 	var id = players_data.front().id
+	if characters[id].is_empty():
+		game_state = GameState.END
+		return
 	var character: BaseCharacter = characters[pid].pop_front()
 	character.disable()
 	character.focus_disable.emit()
@@ -166,6 +175,7 @@ func _handle_character_turn(pid: int):
 	var new_id = current_player.id
 	if characters[new_id].is_empty():
 		game_state = GameState.END
+		return
 	var current_character: BaseCharacter = characters[new_id].front()
 	current_character.enable()
 
