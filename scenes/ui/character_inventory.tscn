@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cc60abixblx4k"]
+[gd_scene load_steps=10 format=3 uid="uid://cc60abixblx4k"]
 
 [ext_resource type="Script" path="res://scenes/ui/character_inventory.gd" id="1_ysyb8"]
 [ext_resource type="Texture2D" uid="uid://b1wdpjaufy61e" path="res://assets/fx/hand_close_pointer.png" id="2_c5li0"]
@@ -6,6 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://tw8t38ns0seh" path="res://icon.svg" id="3_5oq40"]
 [ext_resource type="Texture2D" uid="uid://p48dbopcbrjd" path="res://resources/weapons/Coffee Mug 001 16x161.png" id="5_h3bd0"]
 [ext_resource type="Texture2D" uid="uid://cfps2mtkufr3u" path="res://resources/weapons/dron.png" id="6_itasa"]
+[ext_resource type="Texture2D" uid="uid://cd52pwoll4uln" path="res://resources/weapons/Grenade -01.png" id="7_slqos"]
+[ext_resource type="Texture2D" uid="uid://gdwo5thngkwm" path="res://resources/weapons/poisonicon.png" id="8_vo6e4"]
+[ext_resource type="Texture2D" uid="uid://c7bq5c7cbthoa" path="res://resources/weapons/Angryvirus6.png" id="9_uc4e6"]
 
 [node name="CharacterInventory" type="Control"]
 layout_mode = 3
@@ -74,3 +77,18 @@ text_name = "Damage"
 layout_mode = 2
 icon = ExtResource("6_itasa")
 text_name = "Dron"
+
+[node name="ItemFrame3" parent="SelectContainer/Inventory/InventoryGrid/ItemContainer" instance=ExtResource("2_pp6hs")]
+layout_mode = 2
+icon = ExtResource("7_slqos")
+text_name = "Dinamita"
+
+[node name="ItemFrame4" parent="SelectContainer/Inventory/InventoryGrid/ItemContainer" instance=ExtResource("2_pp6hs")]
+layout_mode = 2
+icon = ExtResource("8_vo6e4")
+text_name = "Veneno"
+
+[node name="ItemFrame5" parent="SelectContainer/Inventory/InventoryGrid/ItemContainer" instance=ExtResource("2_pp6hs")]
+layout_mode = 2
+icon = ExtResource("9_uc4e6")
+text_name = "Virus"

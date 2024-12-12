@@ -13,5 +13,8 @@ const role_to_sprite = {
 
 const weapon_map = {
 	"Damage": preload("res://scenes/weapons/weapon_damage.tscn"),
-	"Dron": preload("res://scenes/weapons/dron_weapon.tscn")
+	"Dron": preload("res://scenes/weapons/dron_weapon.tscn"),
+	"Dinamita": preload("res://scenes/weapons/dinamite_weapon.tscn"),
+	"Veneno": preload("res://scenes/weapons/poison_flask_weapon.tscn"),
+	"Virus": preload("res://scenes/weapons/virus_bomb_weapon.tscn")
 }
