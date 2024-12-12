@@ -6,7 +6,7 @@ extends MarginContainer
 var status = { 1 : false }
 var _menu_stack: Array[Control] = []
 var map_ids: Array = [1, 2, 3] # IDs de los mapas
-var available_maps: Array = ["Araña", "Ebria", "Cafeta"] # Nombres de los mapas
+var available_maps: Array = ["Aranha", "Ebria", "Cafeta"] # Nombres de los mapas
 var selected_map: int = -1
 
 @onready var user = %User
@@ -243,6 +243,7 @@ func starting_game(value: bool):
 	if value:
 		if start_timer.is_stopped():
 			start_timer.start()
+			start_game()
 	else:
 		start_timer.stop()
 
