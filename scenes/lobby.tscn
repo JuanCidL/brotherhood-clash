@@ -24,6 +24,7 @@ layout_mode = 2
 
 [node name="StartMenu" type="VBoxContainer" parent="PanelContainer/Menus"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 
@@ -105,7 +106,6 @@ layout_mode = 2
 
 [node name="ReadyMenu" type="VBoxContainer" parent="PanelContainer/Menus"]
 unique_name_in_owner = true
-visible = false
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 
@@ -145,7 +145,36 @@ text = "Role B"
 [node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/Menus/ReadyMenu"]
 layout_mode = 2
 
-[node name="BackReady" type="Button" parent="PanelContainer/Menus/ReadyMenu/HBoxContainer2"]
+[node name="MapR" type="Button" parent="PanelContainer/Menus/ReadyMenu/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Random
+"
+
+[node name="Map1" type="Button" parent="PanelContainer/Menus/ReadyMenu/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Araña
+"
+
+[node name="Map2" type="Button" parent="PanelContainer/Menus/ReadyMenu/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Ebria"
+
+[node name="Map3" type="Button" parent="PanelContainer/Menus/ReadyMenu/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Cafeta"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="PanelContainer/Menus/ReadyMenu"]
+layout_mode = 2
+
+[node name="BackReady" type="Button" parent="PanelContainer/Menus/ReadyMenu/HBoxContainer3"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -154,7 +183,7 @@ theme_override_font_sizes/font_size = 26
 text = "Back
 "
 
-[node name="Ready" type="Button" parent="PanelContainer/Menus/ReadyMenu/HBoxContainer2"]
+[node name="Ready" type="Button" parent="PanelContainer/Menus/ReadyMenu/HBoxContainer3"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -181,3 +210,4 @@ theme_override_font_sizes/font_size = 26
 text = "5"
 
 [node name="StartTimer" type="Timer" parent="."]
+wait_time = 3.0

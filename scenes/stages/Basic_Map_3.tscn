@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://dfpqbimqk1hlh"]
+
+[ext_resource type="PackedScene" uid="uid://b8hi5fe0tho1q" path="res://scenes/stages/GenFloor.tscn" id="1_lv43f"]
+[ext_resource type="PackedScene" uid="uid://dejwhyg5unsct" path="res://scenes/stages/Table.tscn" id="2_ti6u4"]
+[ext_resource type="PackedScene" uid="uid://d1m7chxpyj47e" path="res://scenes/stages/Building3.tscn" id="3_6gl53"]
+[ext_resource type="Texture2D" uid="uid://5o4iwfjn74c5" path="res://resources/Tilemap_edificios/background_tileset_city_free_rmx.png" id="4_8ads1"]
+
+[node name="BasicMap3" type="Node2D"]
+
+[node name="Ebria" parent="." instance=ExtResource("1_lv43f")]
+position = Vector2(-165, 316)
+scale = Vector2(6, 6)
+
+[node name="Table" parent="." instance=ExtResource("2_ti6u4")]
+position = Vector2(-113, 570)
+scale = Vector2(2, 2)
+
+[node name="Table2" parent="." instance=ExtResource("2_ti6u4")]
+position = Vector2(1152, 571)
+scale = Vector2(2, 2)
+
+[node name="Table3" parent="." instance=ExtResource("2_ti6u4")]
+position = Vector2(557, 570)
+scale = Vector2(2, 2)
+
+[node name="Table4" parent="." instance=ExtResource("2_ti6u4")]
+position = Vector2(389, 570)
+scale = Vector2(2, 2)
+
+[node name="Table5" parent="." instance=ExtResource("2_ti6u4")]
+position = Vector2(229, 571)
+scale = Vector2(2, 2)
+
+[node name="Table6" parent="." instance=ExtResource("2_ti6u4")]
+position = Vector2(61, 570)
+scale = Vector2(2, 2)
+
+[node name="Building3" parent="." instance=ExtResource("3_6gl53")]
+position = Vector2(899, -419)
+scale = Vector2(2, 2)
+
+[node name="BackgroundTilesetCityFree" type="Sprite2D" parent="."]
+show_behind_parent = true
+position = Vector2(697.5, 311.5)
+scale = Vector2(4.78438, 5.06771)
+texture = ExtResource("4_8ads1")

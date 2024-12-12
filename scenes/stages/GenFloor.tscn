@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://c1y6cpfqrnmcl"]
+[gd_scene load_steps=6 format=3 uid="uid://b8hi5fe0tho1q"]
 
-[ext_resource type="Texture2D" uid="uid://dsfonw3iapstk" path="res://resources/Tilemap_edificios/tileset_city_free.png" id="1_ujotl"]
-[ext_resource type="Texture2D" uid="uid://bspt1gugcqlmb" path="res://resources/Tilemap_edificios/tileset_extra.png" id="2_vyewo"]
+[ext_resource type="Texture2D" uid="uid://dsfonw3iapstk" path="res://resources/Tilemap_edificios/tileset_city_free.png" id="1_sc1fv"]
+[ext_resource type="Texture2D" uid="uid://bspt1gugcqlmb" path="res://resources/Tilemap_edificios/tileset_extra.png" id="2_7wdv3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vu728"]
-texture = ExtResource("1_ujotl")
+texture = ExtResource("1_sc1fv")
 2:1/0 = 0
 2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:1/0 = 0
@@ -203,7 +203,7 @@ texture = ExtResource("1_ujotl")
 8:19/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h4r23"]
-texture = ExtResource("2_vyewo")
+texture = ExtResource("2_7wdv3")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -582,17 +582,15 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_vu728")
 sources/2 = SubResource("TileSetAtlasSource_h4r23")
 
-[node name="Ebria" type="Node2D"]
+[node name="GenFloor" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_58jg3")
 format = 2
 layer_0/name = "Sobrenivel"
-layer_0/tile_data = PackedInt32Array(262144, 327682, 3, 196609, 327682, 3, 131074, 327682, 3, 65539, 327682, 3, 65548, 262146, 3, 131085, 262146, 3, 196622, 262146, 2, 262159, 262146, 3, 65540, 262146, 3, 65541, 262146, 3, 65542, 262146, 3, 65543, 262146, 3, 65544, 262146, 3, 65545, 262146, 3, 65546, 262146, 3, 65547, 262146, 3, 131083, 262146, 3, 196619, 262146, 3, 262155, 262146, 3, 262156, 262146, 3, 262157, 262146, 3, 262158, 262146, 2, 196621, 262146, 3, 196620, 262146, 3, 131084, 262146, 3, 131082, 262146, 3, 131081, 262146, 2, 131080, 262146, 3, 131079, 262146, 2, 131078, 262146, 3, 131077, 262146, 2, 131076, 262146, 3, 131075, 262146, 2, 196611, 262146, 3, 262145, 262146, 3, 262146, 262146, 2, 196610, 262146, 3, 262147, 262146, 2, 262148, 262146, 3, 262149, 262146, 3, 262150, 262146, 3, 262151, 262146, 3, 262152, 262146, 3, 262153, 262146, 3, 262154, 262146, 3, 196618, 262146, 3, 196617, 262146, 2, 196616, 262146, 2, 196615, 262146, 3, 196614, 262146, 3, 196613, 262146, 3, 196612, 262146, 3, 65549, 262146, 3, 65550, 327682, 2, 131086, 262146, 2, 131087, 327682, 2, 196623, 262146, 3, 196624, 327682, 2, 262160, 262146, 2, 262161, 327682, 2, 5, 393218, 3, 11, 393218, 3, 12, 458754, 3, 6, 458754, 3)
+layer_0/tile_data = PackedInt32Array(262159, 262146, 2, 262155, 262146, 2, 262156, 262146, 3, 262157, 262146, 3, 262158, 262146, 2, 262145, 262146, 3, 262146, 262146, 2, 262147, 262146, 2, 262148, 262146, 3, 262149, 262146, 2, 262150, 262146, 3, 262151, 262146, 3, 262152, 262146, 3, 262153, 262146, 3, 262154, 262146, 3, 262160, 262146, 2, 196610, 262146, 3, 196611, 262146, 2, 196612, 262146, 3, 196613, 262146, 2, 196614, 262146, 2, 196615, 262146, 2, 196616, 262146, 2, 196617, 262146, 3, 196618, 262146, 2, 196619, 262146, 2, 196620, 262146, 2, 196621, 262146, 3, 196622, 262146, 2, 196623, 262146, 2, 196624, 262146, 3, 196609, 262146, 2)
 layer_1/name = "Arcos"
 layer_1/z_index = 1
-layer_1/tile_data = PackedInt32Array(262147, 524290, 268435459, 196611, 524290, 268435458, 262158, 524290, 3, 196622, 524290, 2)
 layer_2/name = "Fondo"
 layer_2/modulate = Color(0.489622, 0.489622, 0.489622, 1)
 layer_2/z_index = 2
-layer_2/tile_data = PackedInt32Array(262150, 262146, 2, 196614, 262146, 2, 262155, 262146, 2, 196619, 262146, 2)
