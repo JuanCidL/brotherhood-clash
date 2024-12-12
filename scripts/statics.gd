@@ -10,6 +10,8 @@ enum Role {
 	NONE,
 	ROLE_A,
 	ROLE_B,
+	ROLE_C,
+	ROLE_D,
 }
 
 

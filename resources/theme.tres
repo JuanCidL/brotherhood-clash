@@ -1,7 +1,7 @@
 [gd_resource type="Theme" load_steps=20 format=3 uid="uid://bwgdrcgopd0s1"]
 
 [ext_resource type="Texture2D" uid="uid://be1xw1faitmip" path="res://resources/UI_Flat_Frame02a.png" id="1_4r4l7"]
-[ext_resource type="FontVariation" uid="uid://bt8ntslo7crfo" path="res://resources/mono.tres" id="2_epal4"]
+[ext_resource type="FontVariation" path="res://resources/mono.tres" id="2_epal4"]
 [ext_resource type="Texture2D" uid="uid://b162mn4q1h3i3" path="res://resources/UI_Flat_Bar10a.png" id="2_jjy28"]
 [ext_resource type="FontFile" uid="uid://d2y1msmb8h400" path="res://resources/monogram.ttf" id="2_ntwbm"]
 

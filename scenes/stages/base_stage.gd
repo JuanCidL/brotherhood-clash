@@ -3,6 +3,10 @@ extends Node2D
 
 const PLAYER_UI = preload("res://scenes/ui/player_ui.tscn")
 const PLACEHOLDER_SPRITE = preload("res://resources/pj_sinfondo.png")
+const SPRITE_A = preload("res://resources/character_sprite/inge-dcc.png")
+const SPRITE_B = preload("res://resources/character_sprite/inge-quim.png")
+const SPRITE_C = preload("res://resources/character_sprite/inge-bio.png")
+const SPRITE_D = preload("res://resources/character_sprite/inge-minas.png")
 
 const MIN_MINION_QUANTITY = 3
 const MAX_MINION_QUANTITY = 5
@@ -28,7 +32,7 @@ enum GameState{
 # Characters data (Minions + Captain for each player)
 @onready var characters: Dictionary # player_id: int -> characters: Array[BaseCharacter] // Map player id to player's characters
 
-@onready var default_character = MapUtils.role_to_character[Statics.Role.NONE]
+@onready var character_placeholder = MapUtils.role_to_character[Statics.Role.NONE]
 @onready var sprite_placeholder: Sprite2D
 
 # UI
@@ -39,11 +43,13 @@ enum GameState{
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	timer_init = get_tree().create_timer(5)
-	_placeholder_setup()
 	teams_quantity = Game.players.size()
 	for i in Game.players.size():
 		players_data.append(Game.players[i])
-		var id = Game.players[i].id
+		var player = Game.players[i]
+		var id = player.id
+		var role = player.role
+		_placeholder_setup(player.role)
 		characters[id] = []
 		Game.players_health[id] = Game.MINION_MAX_HEALTH * (minions_quantity+1)
 	player_id = Game.get_current_player().id
@@ -100,7 +106,7 @@ func _setup_ui():
 	canvas.add_child(player_ui, true)
 
 # function to setup the placeholder spawn indicator
-func _placeholder_setup():
+func _placeholder_setup(role: Statics.Role):
 	sprite_placeholder = Sprite2D.new()
 	add_child(sprite_placeholder, true)
 	sprite_placeholder.texture = PLACEHOLDER_SPRITE
@@ -116,10 +122,37 @@ func _placeholder_draw(mouse_pos: Vector2):
 @rpc("any_peer", "call_local", "reliable")
 func _handle_place(mouse_pos: Vector2, pid: int):
 	# Instance a new character and setup it in the scene
-	var instance: BaseCharacter = default_character.instantiate()
-	var data: Statics.PlayerData = players_data.front()
-	instance.setup(data)
+	var instance: BaseCharacter = character_placeholder.instantiate()
+	
+	# Obtener el rol del jugador asociado al `pid`
+	var player_data: Statics.PlayerData = null
+	for data in players_data:
+		if data.id == pid:
+			player_data = data
+			break
+	if player_data == null:
+		Debug.log_error("No se encontró el jugador con ID %d" % pid)
+		return
+	
+	# Asignar la textura en función del rol
+	var sprite = instance.find_child("Sprite2D", true)
+	var role = player_data.role
+	match role:
+		1:
+			sprite.texture = SPRITE_A
+		2:
+			sprite.texture = SPRITE_B
+		3:
+			sprite.texture = SPRITE_C
+		4:
+			sprite.texture = SPRITE_D
+		_:
+			sprite.texture = PLACEHOLDER_SPRITE  # Textura por defecto
+	# Configurar el personaje
+	instance.setup(player_data)
 	add_child(instance, true)
+	
+	# Configurar eventos para el jugador actual
 	if Game.get_current_player().id == instance.id:
 		instance.enabled.connect(func(value: bool) -> void:
 			if value:
@@ -137,21 +170,22 @@ func _handle_place(mouse_pos: Vector2, pid: int):
 			instance.change_state(BaseCharacter.PlayerState.WEAPON_THROWING)
 		)
 
-	# Add to world
+	# Añadir al mundo
 	instance.global_position = mouse_pos
 	instance.weapon_action.connect(_on_weapon_action)
 	instance.die_signal.connect(_on_character_die)
 	characters[pid].append(instance)
 
-	# change turn
+	# Cambiar turno
 	_change_turn()
 	
+	# Verificar si todos los equipos tienen el mínimo de personajes
 	var count: int = 0
 	for arr in characters.values():
-		if arr.size()<minions_quantity+1: # minions quantities + captain
-			break 
-		count+=1
-	if count==teams_quantity:
+		if arr.size() < minions_quantity + 1:  # Minions + Capitán
+			break
+		count += 1
+	if count == teams_quantity:
 		_set_game_state(GameState.PLAYING)
 		sprite_placeholder.hide()
 

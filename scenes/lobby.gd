@@ -17,6 +17,8 @@ var selected_map: int = -1
 @onready var confirm_join: Button = %ConfirmJoin
 @onready var role_a: Button = %RoleA
 @onready var role_b: Button = %RoleB
+@onready var role_c: Button = %RoleC
+@onready var role_d: Button = %RoleD
 @onready var map_R: Button = %MapR
 @onready var map_1: Button = %Map1
 @onready var map_2: Button = %Map2
@@ -56,6 +58,8 @@ func _ready():
 	
 	role_a.pressed.connect(func(): Game.set_current_player_role(Statics.Role.ROLE_A))
 	role_b.pressed.connect(func(): Game.set_current_player_role(Statics.Role.ROLE_B))
+	role_c.pressed.connect(func(): Game.set_current_player_role(Statics.Role.ROLE_C))
+	role_d.pressed.connect(func(): Game.set_current_player_role(Statics.Role.ROLE_D))
 	
 	if multiplayer.is_server():
 		map_R.pressed.connect(func(): _on_map_selected(-1))
@@ -233,6 +237,8 @@ func set_player_ready(id: int, value: bool):
 func starting_game(value: bool):
 	role_a.disabled = value
 	role_b.disabled = value
+	role_c.disabled = value
+	role_d.disabled = value
 	if multiplayer.is_server():
 		map_R.disabled = value
 		map_1.disabled = value
@@ -262,7 +268,7 @@ func _check_ready() -> void:
 	for player in Game.players:
 		if not player.role in roles and player.role != Statics.Role.NONE:
 			roles.push_back(player.role)
-	ready_toggle.disabled = roles.size() != Statics.Role.size() - 1 or selected_map == -1
+	ready_toggle.disabled = roles.size() != Game.players.size() or selected_map == -1
 
 
 func _disconnect():
