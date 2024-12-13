@@ -64,6 +64,10 @@ theme_override_constants/separation = 8
 layout_mode = 2
 text = "Start"
 
+[node name="ControlsB" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Controls"
+
 [node name="CreditosB" type="Button" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 text = "Credits"
@@ -73,5 +77,7 @@ layout_mode = 2
 text = "Quit"
 
 [connection signal="pressed" from="PanelContainer/VBoxContainer/StartB" to="." method="_on_start_b_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/ControlsB" to="." method="_on_controls_b_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/ControlsB" to="." method="_on_options_b_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/CreditosB" to="." method="_on_creditos_b_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/QuitB" to="." method="_on_quit_b_pressed"]

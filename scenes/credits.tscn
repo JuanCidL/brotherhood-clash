@@ -89,6 +89,8 @@ text = "[center][color=#f5e042][outline_color=#1c3a73]
 
 [url=https://crusenho.itch.io/]Crusenho:[/url] [url=https://crusenho.itch.io/complete-ui-essential-pack]Complete UI Essential Pack[/url]
 (Interface Assets)
+[url=https://crusenho.itch.io/icons-essential-pack-free-icons]Icons Essential Pack[/url]
+(Icon Assets)
 
 
 [url=https://sungraphica.itch.io/]SunGraphica:[/url] [url=https://sungraphica.itch.io/gun-collection-game-asset]Gun collection game asset[/url]
@@ -143,8 +145,8 @@ text = "Back"
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
-position = Vector2(636.5, 934.646)
-scale = Vector2(0.582031, 1.47894)
+position = Vector2(636.5, 956.146)
+scale = Vector2(0.582031, 1.51212)
 texture = ExtResource("3_nxprs")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
