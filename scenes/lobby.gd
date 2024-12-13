@@ -249,7 +249,7 @@ func starting_game(value: bool):
 	if value:
 		if start_timer.is_stopped():
 			start_timer.start()
-			start_game()
+			#start_game()
 	else:
 		start_timer.stop()
 
