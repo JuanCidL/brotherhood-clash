@@ -19,6 +19,7 @@ var effect_activated
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super._ready()
+	action_time = 10
 	timer = stop_time
 	effect_power = 100
 	throw_power = 10
@@ -54,7 +55,6 @@ func stop_rigid_body():
 
 #Funcion para hacer especificamente lo que se quiere de DinamiteWeapon
 func weapon_effect(power: float) -> void:
-	print("se activó weapon effect")
 	explosion()
 	await get_tree().create_timer(1.5).timeout
 	self.visible = false
@@ -71,7 +71,6 @@ func weapon_effect(power: float) -> void:
 # Hacer un timer await get_tree().create_timer(5).timeout
 func explosion() -> void: 
 	if not explosion_scene:
-		print("no se pone")
 		return
 	var explosion_inst = explosion_scene.instantiate()
 	explosion_inst.global_position = global_position
