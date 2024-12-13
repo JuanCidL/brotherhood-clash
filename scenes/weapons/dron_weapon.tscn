@@ -1,13 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://niw5m0vifv5v"]
+[gd_scene load_steps=6 format=3 uid="uid://niw5m0vifv5v"]
 
 [ext_resource type="Script" path="res://scenes/weapons/dron_weapon.gd" id="1_qt4uu"]
 [ext_resource type="Texture2D" uid="uid://cfps2mtkufr3u" path="res://resources/weapons/dron.png" id="2_j7v2x"]
 [ext_resource type="PackedScene" uid="uid://bvyl75y3qnq35" path="res://scenes/utils/drag_area.tscn" id="3_t2f4n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5b0md"]
-size = Vector2(30, 16)
+size = Vector2(30, 13)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mi620"]
+size = Vector2(60, 26)
 
 [node name="DronWeapon" type="RigidBody2D"]
+light_mask = 4
+visibility_layer = 3
+collision_layer = 4
+collision_mask = 3
 freeze = true
 script = ExtResource("1_qt4uu")
 
@@ -25,3 +32,13 @@ body = NodePath("..")
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
+
+[node name="HurtArea" type="Area2D" parent="."]
+light_mask = 4
+visibility_layer = 2
+scale = Vector2(1.1, 1.2)
+collision_layer = 4
+collision_mask = 2
+
+[node name="HurtBox" type="CollisionShape2D" parent="HurtArea"]
+shape = SubResource("RectangleShape2D_mi620")

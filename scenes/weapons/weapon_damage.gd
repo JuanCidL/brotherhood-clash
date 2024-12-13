@@ -11,8 +11,8 @@ func _ready() -> void:
 	
 func _on_body_entered(body: Node2D):
 	if not can_effect:
+		print("weapon-damage-not can effect")
 		return
-		
 	body = body as BaseCharacter
 	if body.id == Game.get_current_player().id && body.has_method("take_damage"):
 		body.take_damage.rpc(damage)

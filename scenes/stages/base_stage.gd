@@ -7,7 +7,7 @@ const SPRITE_A = preload("res://resources/character_sprite/inge-dcc.png")
 const SPRITE_B = preload("res://resources/character_sprite/inge-quim.png")
 const SPRITE_C = preload("res://resources/character_sprite/inge-bio.png")
 const SPRITE_D = preload("res://resources/character_sprite/inge-minas.png")
-
+@onready var dead_zone :Area2D = $Area2D
 const MIN_MINION_QUANTITY = 3
 const MAX_MINION_QUANTITY = 5
 
@@ -42,6 +42,7 @@ enum GameState{
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	#dead_zone.connect("body_entered", _on_body_entered)
 	timer_init = get_tree().create_timer(5)
 	_placeholder_setup()
 	teams_quantity = Game.players.size()
@@ -57,7 +58,7 @@ func _ready() -> void:
 		_setup_current_player.rpc(cp)
 	_setup_ui()
 
-
+	
 func _process(delta: float) -> void:
 	
 	var mouse_pos = get_local_mouse_position()
@@ -251,3 +252,13 @@ func hide_inventory_button() -> void:
 	
 func show_inventory() -> void:
 	player_ui.show_inventory()
+
+func _on_body_entered(body: Node2D):
+	print("daño")
+	body = body as BaseCharacter
+	if body.id == Game.get_current_player().id && body.has_method("take_damage"):
+		body.take_damage.rpc(body.health)
+	await get_tree().create_timer(1).timeout
+	queue_free()
+
+	

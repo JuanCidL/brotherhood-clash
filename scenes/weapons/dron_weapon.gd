@@ -8,12 +8,19 @@ var syncro: float = false
 #var timer4: float = 2.0
 var is_stopped: bool = false
 @export var move_speed: float = 200
+@onready var hurt_area: Area2D = $HurtArea
+@onready var damage = 10
+var pos_fall: Vector2
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	super._ready()
 	timer = stop_time
 	throw_power = 10
 	#sleeping = false
 	gravity_again()
+	damage = 50
+	action_time = 15
+	hurt_area.connect("body_entered", _on_body_entered)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
@@ -30,6 +37,7 @@ func _physics_process(delta: float) -> void:
 				handle_player_input(delta)	
 			elif timer2 <= 0.0 and not syncro: #Si el tiempo de vuelo terminó ponemos la gravedad
 				print("hola")
+				pos_fall = self.global_position
 				gravity_again()
 				syncro = true
 	#			action(delta)
@@ -92,4 +100,20 @@ func handle_player_input(delta: float):
 func send_pos(pos:Vector2):
 	self.position = pos
 	
+func _on_body_entered(body: Node2D):
+	print("daño")
+	if not can_effect:
+		print("not daño")
+		return
+	body = body as BaseCharacter
+	if body.id == Game.get_current_player().id && body.has_method("take_damage"):
+		print("este si es daño")
+		damage -= (pos_fall.y - body.global_position.y)/20
+		print(damage)
+		if damage >= 80:
+			damage = 80
+		body.take_damage.rpc(damage)
+	await get_tree().create_timer(1).timeout
+	queue_free()
+
 	

@@ -20,7 +20,7 @@ signal state_change(state)
 @onready var weapons: Array = Array([], TYPE_OBJECT, "", null)
 @onready var id: int
 signal die_signal(character: BaseCharacter)
-
+var can_die = true
 # Debug
 @onready var weapon_scene = preload("res://scenes/weapons/weapon_damage.tscn")
 @onready var dron_scene = preload("res://scenes/weapons/dron_weapon.tscn")
@@ -95,6 +95,13 @@ func _input(event: InputEvent) -> void:
 # Phisics
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
+	if global_position.y > 500 and can_die: 
+		self.take_damage(self.health)
+		can_die = false
+		var padre = self.get_parent()
+		padre._on_character_die(self)
+		padre._change_turn()
+		#_change_turn()
 	
 
 @rpc("authority", "call_remote")

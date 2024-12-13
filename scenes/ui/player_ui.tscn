@@ -87,10 +87,11 @@ layout_mode = 2
 
 [node name="InventoryButton" type="Button" parent="."]
 visible = false
+show_behind_parent = true
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 size_flags_horizontal = 8
-size_flags_vertical = 8
+size_flags_vertical = 4
 theme_type_variation = &"SelectButton"
 disabled = true
 icon = ExtResource("3_6me1p")
