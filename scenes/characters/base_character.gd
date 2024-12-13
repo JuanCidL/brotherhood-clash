@@ -95,7 +95,7 @@ func _input(event: InputEvent) -> void:
 # Phisics
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
-	if global_position.y > 500 and can_die: 
+	if global_position.y > 600 and can_die: 
 		self.take_damage(self.health)
 		can_die = false
 		var padre = self.get_parent()
